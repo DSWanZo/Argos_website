@@ -739,8 +739,8 @@
                 hist[d[i]]++;
                 total++;
             }
-            const lo = Math.round(total * 0.20);
-            const hi = Math.round(total * 0.20);
+            const lo = Math.round(total * 0.15);
+            const hi = Math.round(total * 0.85);
             let cum = 0, gMin = 0, gMax = 255;
             for (let v = 0; v < 256; v++) {
                 cum += hist[v];
