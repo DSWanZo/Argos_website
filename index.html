@@ -297,6 +297,22 @@
             text-decoration: underline;
         }
 
+        .eq-term {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .eq-expr {
+            border-bottom: 1.5px solid #aab;
+            padding-bottom: 3px;
+        }
+        .eq-label {
+            font-size: 0.7rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #888;
+            padding-top: 3px;
+        }
+
         .version {
             display: inline-block;
             background: rgba(255, 255, 255, 0.25);
@@ -407,13 +423,6 @@
                 padding: 1.5rem;
             }
 
-            .equation-block table {
-                transform: scale(0.75);
-                transform-origin: center top;
-            }
-            .equation-block {
-                padding: 1rem 0.25rem;
-            }
         }
     </style>
 </head>
@@ -462,35 +471,28 @@
                     correlation model, allowing a sharp jump to be identified <em>within</em> each subset.
                 </p>
                 <p>The subset shape function is augmented with a jump vector and a Heaviside function:</p>
-                <div class="equation-block" style="background: linear-gradient(135deg, #f8f8fb 0%, #f0f0f8 100%); border-radius: 8px; border-left: 3px solid #1a1a2e; padding: 1.5rem 1rem; margin: 1.25rem 0; overflow-x: auto;">
-                    <table style="margin: 0 auto; border-collapse: collapse; font-family: 'Times New Roman', Georgia, serif; color: #1a1a2e;">
-                        <tr style="font-size: 1.15rem; letter-spacing: 0.5px;">
-                            <td style="padding: 0 0.15rem; text-align: right;"><b>&phi;</b>(<b>x</b>)&nbsp;=</td>
-                            <td style="padding: 0 0.25rem; text-align: center;"><b>x</b> + <b>u</b></td>
-                            <td style="padding: 0 0.15rem; text-align: center;">+</td>
-                            <td style="padding: 0 0.25rem; text-align: center;"><b>&nabla;u</b> &middot; (<b>x</b> &minus; <b>x</b><sub>0</sub>)</td>
-                            <td style="padding: 0 0.15rem; text-align: center;">+</td>
-                            <td style="padding: 0 0.25rem; text-align: center;"><b>u'</b> &middot; <i>H</i>(<b>x</b> &minus; <b>x</b><sub>0</sub>)</td>
-                        </tr>
-                        <tr style="font-size: 0.75rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #888;">
-                            <td></td>
-                            <td style="border-top: 1.5px solid #aab; text-align: center; padding-top: 3px;">rigid body</td>
-                            <td></td>
-                            <td style="border-top: 1.5px solid #aab; text-align: center; padding-top: 3px;">first gradient</td>
-                            <td></td>
-                            <td style="border-top: 1.5px solid #aab; text-align: center; padding-top: 3px;">jump &times; Heaviside</td>
-                        </tr>
-                        <tr style="font-size: 0.7rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-                            <td></td>
-                            <td colspan="3" style="text-align: center; padding-top: 0.5rem;">
-                                <span style="color: #fff; background: #aab; border-radius: 3px; padding: 0.15rem 0.6rem;">Conventional DIC</span>
-                            </td>
-                            <td></td>
-                            <td style="text-align: center; padding-top: 0.5rem;">
-                                <span style="color: #fff; background: #1a1a2e; border-radius: 3px; padding: 0.15rem 0.6rem;">Heaviside-DIC</span>
-                            </td>
-                        </tr>
-                    </table>
+                <div class="equation-block" style="background: linear-gradient(135deg, #f8f8fb 0%, #f0f0f8 100%); border-radius: 8px; border-left: 3px solid #1a1a2e; padding: 1.5rem 1rem; margin: 1.25rem 0; font-family: 'Times New Roman', Georgia, serif; color: #1a1a2e;">
+                    <div class="eq-row" style="display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 0.25rem 0.5rem; font-size: 1.15rem; letter-spacing: 0.5px;">
+                        <span><b>&phi;</b>(<b>x</b>) =</span>
+                        <span class="eq-term">
+                            <span class="eq-expr"><b>x</b> + <b>u</b></span>
+                            <span class="eq-label">rigid body</span>
+                        </span>
+                        <span>+</span>
+                        <span class="eq-term">
+                            <span class="eq-expr"><b>&nabla;u</b> &middot; (<b>x</b> &minus; <b>x</b><sub>0</sub>)</span>
+                            <span class="eq-label">first gradient</span>
+                        </span>
+                        <span>+</span>
+                        <span class="eq-term">
+                            <span class="eq-expr"><b>u'</b> &middot; <i>H</i>(<b>x</b> &minus; <b>x</b><sub>0</sub>)</span>
+                            <span class="eq-label">jump &times; Heaviside</span>
+                        </span>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 0.75rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.7rem;">
+                        <span style="color: #fff; background: #aab; border-radius: 3px; padding: 0.15rem 0.6rem;">Conventional DIC</span>
+                        <span style="color: #fff; background: #1a1a2e; border-radius: 3px; padding: 0.15rem 0.6rem;">Heaviside-DIC</span>
+                    </div>
                 </div>
                 <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem;">
                     Based on: F. Bourdin, J.C. Stinville, M.P. Echlin, P.G. Callahan, W.C. Lenthe, C.J. Torbet,
