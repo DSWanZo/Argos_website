@@ -18,6 +18,8 @@
             background-color: #fafafa;
         }
 
+        /* ========== HEADER ========== */
+
         header {
             background-color: #1a1a2e;
             color: #fff;
@@ -70,6 +72,8 @@
             border-bottom-color: #fff;
         }
 
+        /* ========== TAB CONTENT ========== */
+
         .tab-content {
             display: none;
         }
@@ -79,10 +83,169 @@
         }
 
         main {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 2rem 1.5rem;
+            padding: 2.5rem 1.5rem;
         }
+
+        /* ========== HERO SECTION ========== */
+
+        .hero {
+            text-align: center;
+            padding: 2rem 2rem 2.5rem 2rem;
+            margin-bottom: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            border: none;
+            padding-bottom: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero p {
+            color: #555;
+            font-size: 1.05rem;
+            max-width: 640px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: #f0f0f5;
+            color: #1a1a2e;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 0.3rem 0.75rem;
+            border-radius: 20px;
+        }
+
+        /* ========== FEATURE SECTIONS ========== */
+
+        .feature-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 2rem 2rem 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-section h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .feature-section .section-subtitle {
+            color: #888;
+            font-size: 0.9rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .feature-section p {
+            margin-bottom: 0.75rem;
+            color: #555;
+        }
+
+        .feature-section ul {
+            margin-left: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-section li {
+            margin-bottom: 0.3rem;
+            color: #555;
+        }
+
+        /* ========== SCREENSHOT PLACEHOLDER ========== */
+
+        .screenshot-placeholder {
+            background: #f4f4f8;
+            border: 2px dashed #ccc;
+            border-radius: 6px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 1.25rem;
+            color: #999;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .screenshot-placeholder .placeholder-label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.25rem;
+        }
+
+        /* When screenshots are added, use this class instead */
+        .screenshot {
+            margin-top: 1.25rem;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .screenshot-caption {
+            background: #f8f8fa;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+        }
+
+        /* ========== TECH GRID ========== */
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .tech-item {
+            padding: 0.75rem 1rem;
+            background: #f8f8fb;
+            border-radius: 6px;
+        }
+
+        .tech-item strong {
+            display: block;
+            font-size: 0.85rem;
+            color: #1a1a2e;
+            margin-bottom: 0.15rem;
+        }
+
+        .tech-item span {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        /* ========== GET SECTION ========== */
 
         section {
             background: #fff;
@@ -92,7 +255,7 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
-        h2 {
+        section h2 {
             font-size: 1.3rem;
             font-weight: 600;
             color: #1a1a2e;
@@ -148,13 +311,16 @@
             display: inline-block;
             background: #1a1a2e;
             color: #fff;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             padding: 0.15rem 0.5rem;
             border-radius: 3px;
             margin-left: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            vertical-align: middle;
         }
+
+        /* ========== COMING SOON ========== */
 
         .coming-soon {
             text-align: center;
@@ -171,6 +337,8 @@
             color: #999;
         }
 
+        /* ========== FOOTER ========== */
+
         footer {
             background-color: #1a1a2e;
             color: #a0a0b0;
@@ -179,7 +347,7 @@
         }
 
         .footer-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -218,6 +386,26 @@
             border-top: 1px solid #2a2a3e;
             color: #666;
         }
+
+        /* ========== RESPONSIVE ========== */
+
+        @media (max-width: 600px) {
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+
+            main {
+                padding: 1.5rem 1rem;
+            }
+
+            .feature-section {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -226,35 +414,203 @@
         <h1>Argos</h1>
         <p>Digital Image Correlation Software</p>
         <nav class="tabs">
-            <button class="tab-button active" data-tab="argos2d">Argos2D <span class="version">v1.0.0</span></button>
+            <button class="tab-button active" data-tab="argos2d">Argos2D <span class="version">v1.0.1</span></button>
             <button class="tab-button" data-tab="argos3d">Argos3D</button>
         </nav>
     </header>
 
     <div id="argos2d" class="tab-content active">
         <main>
-            <section>
-                <h2>Features</h2>
-                <ul>
-                    <li>Digital Image Correlation (DIC) for experimental mechanics</li>
-                    <li>Full-field displacement and strain measurements</li>
-                    <li>GPU-parallel correlation (CUDA)</li>
-                    <li>Heaviside enrichment for crack and discontinuity analysis</li>
-                    <li>Customizable derivative and smoothing kernels</li>
-                    <li>TIFF export</li>
-                </ul>
-            </section>
 
-            <section>
-                <h2>Microscopy Module <span class="addon-label">Add-on</span></h2>
-                <p>Optional module for LSCM/SEM imaging applications.</p>
-                <ul>
-                    <li>Mosaic mode: multi-tile stitching for large specimens</li>
-                    <li>Twinning mode: transition thickness optimization for twins and slip bands</li>
-                    <li>3D height maps: out-of-plane displacement from LSCM topography</li>
-                </ul>
-            </section>
+            <!-- ==================== HERO ==================== -->
+            <div class="hero">
+                <h2>GPU-Accelerated DIC with Discontinuity Enrichment</h2>
+                <p>
+                    Argos2D embeds Heaviside-enriched shape functions directly into the correlation,
+                    capturing cracks, twins and slip bands.
+                </p>
+                <div style="margin: 1.5rem auto; max-width: 820px;">
+                    <img src="screens/GUI.png" alt="Argos2D interface — displacement field with Heaviside enrichment" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.3);">
+                    <p style="margin-top: 0.5rem; font-size: 0.75rem; color: #8888aa; font-style: italic; line-height: 1.4;">
+                        Dataset from A. Rouwane, D. Texier, J.-N. Périé, J.-E. Dufour, J.C. Stinville et al.,
+                        <a href="https://doi.org/10.1016/j.optlastec.2024.111165" style="color: #9999cc;" target="_blank"><em>Optics and Laser Technology</em>, Vol. 177, 2024</a>.
+                        Courtesy of Damien Texier.
+                    </p>
+                </div>
+                <div class="hero-tags">
+                    <span class="hero-tag">CUDA native</span>
+                    <span class="hero-tag">Multi-GPU compatible</span>
+                    <span class="hero-tag">Interactive visualization</span>
+                </div>
+            </div>
 
+            <!-- ==================== 1. HEAVISIDE ENRICHMENT ==================== -->
+            <div class="feature-section">
+                <h2>Heaviside-Enriched Displacement Fields</h2>
+                <p>
+                    Standard DIC assumes continuous displacement inside each subset, which smears out
+                    discontinuities across several pixels. Argos adds a Heaviside step function to the
+                    correlation model, allowing a sharp jump to be identified <em>within</em> each subset.
+                </p>
+                <p>The subset shape function is augmented with a jump vector and a Heaviside function:</p>
+                <div style="background: linear-gradient(135deg, #f8f8fb 0%, #f0f0f8 100%); border-radius: 8px; border-left: 3px solid #1a1a2e; padding: 1.5rem 1rem; margin: 1.25rem 0; overflow-x: auto;">
+                    <table style="margin: 0 auto; border-collapse: collapse; font-family: 'Times New Roman', Georgia, serif; color: #1a1a2e;">
+                        <tr style="font-size: 1.15rem; letter-spacing: 0.5px;">
+                            <td style="padding: 0 0.15rem; text-align: right;"><b>&phi;</b>(<b>x</b>)&nbsp;=</td>
+                            <td style="padding: 0 0.25rem; text-align: center;"><b>x</b> + <b>u</b></td>
+                            <td style="padding: 0 0.15rem; text-align: center;">+</td>
+                            <td style="padding: 0 0.25rem; text-align: center;"><b>&nabla;u</b> &middot; (<b>x</b> &minus; <b>x</b><sub>0</sub>)</td>
+                            <td style="padding: 0 0.15rem; text-align: center;">+</td>
+                            <td style="padding: 0 0.25rem; text-align: center;"><b>u'</b> &middot; <i>H</i>(<b>x</b> &minus; <b>x</b><sub>0</sub>)</td>
+                        </tr>
+                        <tr style="font-size: 0.75rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #888;">
+                            <td></td>
+                            <td style="border-top: 1.5px solid #aab; text-align: center; padding-top: 3px;">rigid body</td>
+                            <td></td>
+                            <td style="border-top: 1.5px solid #aab; text-align: center; padding-top: 3px;">first gradient</td>
+                            <td></td>
+                            <td style="border-top: 1.5px solid #aab; text-align: center; padding-top: 3px;">jump &times; Heaviside</td>
+                        </tr>
+                        <tr style="font-size: 0.7rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+                            <td></td>
+                            <td colspan="3" style="text-align: center; padding-top: 0.5rem;">
+                                <span style="color: #fff; background: #aab; border-radius: 3px; padding: 0.15rem 0.6rem;">Conventional DIC</span>
+                            </td>
+                            <td></td>
+                            <td style="text-align: center; padding-top: 0.5rem;">
+                                <span style="color: #fff; background: #1a1a2e; border-radius: 3px; padding: 0.15rem 0.6rem;">Heaviside-DIC</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem;">
+                    Based on: F. Bourdin, J.C. Stinville, M.P. Echlin, P.G. Callahan, W.C. Lenthe, C.J. Torbet,
+                    D. Texier, F. Bridier, J. Cormier, P. Villechaise, T.M. Pollock, V. Valle,
+                    <em>Measurements of plastic localization by heaviside-digital image correlation</em>,
+                    Acta Materialia, Vol.&nbsp;157, pp.&nbsp;307&ndash;325, 2018.
+                    <a href="https://doi.org/10.1016/j.actamat.2018.07.013" target="_blank" rel="noopener">DOI</a>
+                </p>
+
+                <!-- Before/After slider: DIC vs H-DIC with jet colormap -->
+                <div class="comparison-slider" data-src-before="screens/displacement_tab_DIC.png" data-src-after="screens/displacement_tab_HDIC.png" style="margin-top: 1.25rem; position: relative; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.12); user-select: none; -webkit-user-select: none; background: #000;">
+                    <!-- After canvas (H-DIC) — full width background -->
+                    <canvas class="cm-after" style="display: block; width: 100%; height: auto;"></canvas>
+                    <!-- Before canvas (DIC) — clipped by slider -->
+                    <div class="comparison-before" style="position: absolute; top: 0; left: 0; width: 50%; height: 100%; overflow: hidden;">
+                        <canvas class="cm-before" style="display: block; height: 100%;"></canvas>
+                    </div>
+                    <!-- Slider handle -->
+                    <div class="comparison-handle" style="position: absolute; top: 0; left: 50%; width: 3px; height: 100%; background: #fff; cursor: ew-resize; box-shadow: 0 0 6px rgba(0,0,0,0.3); z-index: 2;">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; background: #fff; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center;">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="color: #1a1a2e;">
+                                <path d="M5 3L1 8L5 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11 3L15 8L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Labels -->
+                    <div style="position: absolute; top: 0.5rem; left: 0.75rem; background: rgba(0,0,0,0.55); color: #fff; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 3px; z-index: 1;">Standard DIC</div>
+                    <div style="position: absolute; top: 0.5rem; right: 0.75rem; background: rgba(26,26,46,0.75); color: #fff; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 3px; z-index: 1;">Heaviside-DIC</div>
+                </div>
+                <p style="margin-top: 0.75rem; font-size: 0.8rem; color: #888; font-style: italic; line-height: 1.5; text-align: center;">
+                    U<sub>x</sub> displacement field computed on a dataset from
+                    A. Rouwane, D. Texier, J.-N. Périé, J.-E. Dufour, J.C. Stinville et al.,
+                    <a href="https://doi.org/10.1016/j.optlastec.2024.111165" style="color: #6a6aaa;" target="_blank">"High resolution and large field of view imaging using a stitching procedure coupled with distortion corrections"</a>,
+                    <em>Optics and Laser Technology</em>, Vol. 177, 2024.
+                    Dataset courtesy of Damien Texier.
+                </p>
+            </div>
+
+            <!-- ==================== 2. FRACTURE ANALYSIS ==================== -->
+            <div class="feature-section">
+                <h2>Fracture &amp; Discontinuity Analysis</h2>
+                <p class="section-subtitle">Dedicated post-processing for cracks, twins and slip bands.</p>
+                <p>
+                    The fracture tab exposes the full enrichment output: crack opening displacement (intensity and direction),
+                    crack angle &alpha;, opening direction &beta;, and a crystallographic decomposition into
+                    screw (longitudinal) and edge (transverse) components relative to the crack front.
+                </p>
+
+                <div style="margin-top: 1.25rem;">
+                    <img src="screens/fracture_tab1.png" alt="Argos2D — Fracture tab showing crack opening fields" style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
+                    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #888; font-style: italic; line-height: 1.5; text-align: center;">
+                        Dataset from A. Rouwane, D. Texier, J.-N. Périé, J.-E. Dufour, J.C. Stinville et al.,
+                        <a href="https://doi.org/10.1016/j.optlastec.2024.111165" style="color: #6a6aaa;" target="_blank"><em>Optics and Laser Technology</em>, Vol. 177, 2024</a>.
+                        Courtesy of Damien Texier.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ==================== 3. STRAIN POST-PROCESSING ==================== -->
+            <div class="feature-section">
+                <h2>Strain Post-Processing</h2>
+                <p class="section-subtitle">Customizable derivative kernels and built-in criteria.</p>
+                <p>
+                    Compute the full strain tensor (&epsilon;<sub>xx</sub>, &epsilon;<sub>yy</sub>, &epsilon;<sub>xy</sub>)
+                    from displacement fields using separable gradient operators.
+                </p>
+                <ul>
+                    <li><strong>Separable gradient kernels</strong> &mdash; Sobel, Scharr, centered finite differences, or custom</li>
+                    <li><strong>Custom expressions</strong> &mdash; built-in math parser for user-defined strain criteria</li>
+                </ul>
+
+                <div style="margin-top: 1.25rem;">
+                    <img src="screens/strain_tab2.png" alt="Argos2D — Strain tab with kernel selector and custom criterion editor" style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
+                    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #888; font-style: italic; line-height: 1.5; text-align: center;">
+                        Dataset from A. Rouwane, D. Texier, J.-N. Périé, J.-E. Dufour, J.C. Stinville et al.,
+                        <a href="https://doi.org/10.1016/j.optlastec.2024.111165" style="color: #6a6aaa;" target="_blank"><em>Optics and Laser Technology</em>, Vol. 177, 2024</a>.
+                        Courtesy of Damien Texier.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ==================== 5. MOSAIC & BATCH ==================== -->
+            <div class="feature-section">
+                <h2>Mosaic Stitching &amp; Batch Mode</h2>
+                <p class="section-subtitle">Large-area analysis from tiled acquisitions.</p>
+                <p>
+                    Assemble multi-tile acquisitions into a seamless mosaic before running DIC.
+                </p>
+                <ul>
+                    <li><strong>Automated grid layout</strong> &mdash; row/column organization with configurable overlap, handles missing tiles</li>
+                    <li><strong>Batch mode</strong> &mdash; process each tile pair independently without stitching, for high-throughput analysis</li>
+                </ul>
+
+                <div style="margin-top: 1.25rem;">
+                    <img src="screens/mosaic_tab.png" alt="Argos2D — Mosaic stitching mode" style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
+                    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #888; font-style: italic; line-height: 1.5; text-align: center;">
+                        Dataset from A. Rouwane, D. Texier, J.-N. Périé, J.-E. Dufour, J.C. Stinville et al.,
+                        <a href="https://doi.org/10.1016/j.optlastec.2024.111165" style="color: #6a6aaa;" target="_blank"><em>Optics and Laser Technology</em>, Vol. 177, 2024</a>.
+                        Courtesy of Damien Texier.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ==================== 6. UNDER THE HOOD ==================== -->
+            <div class="feature-section">
+                <h2>Under the Hood</h2>
+                <p class="section-subtitle">Core engine specifications.</p>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <strong>GPU Correlation</strong>
+                        <span>CUDA-native correlation with multi-GPU support</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Pixel Search</strong>
+                        <span>Hierarchical coarse-to-fine + FFT-accelerated mode</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Sub-pixel Optimization</strong>
+                        <span>IC-GN (Inverse Compositional Gauss-Newton) with bilinear, bicubic, or B-spline cubic interpolation</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Shape Functions</strong>
+                        <span>Translation (2 DOF), affine (6 DOF), Heaviside-enriched (10 DOF), twinning mode (11 DOF)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== GET ARGOS2D ==================== -->
             <section>
                 <h2>Get Argos2D</h2>
                 <p>
@@ -268,15 +624,8 @@
                     <li>NVIDIA GPU (minimum: Turing generation, e.g. GTX 16xx / RTX 20xx)</li>
                 </ul>
 
-                <h3>Installation</h3>
-                <ol>
-                    <li>Extract the archive to a folder of your choice</li>
-                    <li>Run Argos2D.exe</li>
-                </ol>
-                <p>
-                    No system installation required. The application is portable.
-                </p>
             </section>
+
         </main>
     </div>
 
@@ -305,6 +654,7 @@
     </footer>
 
     <script>
+        // Tab switching
         document.querySelectorAll('.tab-button').forEach(button => {
             button.addEventListener('click', () => {
                 document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
@@ -312,6 +662,164 @@
 
                 button.classList.add('active');
                 document.getElementById(button.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Jet colormap — same formula as OmniCorr2D (main.cpp jetColor)
+        function jetLut() {
+            const lut = new Uint8Array(256 * 3);
+            for (let i = 0; i < 256; i++) {
+                const t = i / 255;
+                lut[i * 3]     = Math.round(Math.min(1, Math.max(0, 1.5 - Math.abs(4 * t - 3))) * 255);
+                lut[i * 3 + 1] = Math.round(Math.min(1, Math.max(0, 1.5 - Math.abs(4 * t - 2))) * 255);
+                lut[i * 3 + 2] = Math.round(Math.min(1, Math.max(0, 1.5 - Math.abs(4 * t - 1))) * 255);
+            }
+            return lut;
+        }
+        const JET = jetLut();
+
+        // Light Gaussian blur on grayscale channel to remove 8-bit banding
+        function blurGray(imageData, radius) {
+            const w = imageData.width, h = imageData.height;
+            const d = imageData.data;
+            // Extract gray channel into float array
+            const src = new Float32Array(w * h);
+            for (let i = 0; i < w * h; i++) src[i] = d[i * 4];
+            const dst = new Float32Array(w * h);
+            // Separable box blur (3 passes ≈ Gaussian)
+            const passes = 3;
+            let a = src, b = dst;
+            for (let p = 0; p < passes; p++) {
+                // Horizontal
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        let sum = 0, count = 0;
+                        for (let dx = -radius; dx <= radius; dx++) {
+                            const nx = x + dx;
+                            if (nx >= 0 && nx < w) { sum += a[y * w + nx]; count++; }
+                        }
+                        b[y * w + x] = sum / count;
+                    }
+                }
+                [a, b] = [b, a];
+                // Vertical
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        let sum = 0, count = 0;
+                        for (let dy = -radius; dy <= radius; dy++) {
+                            const ny = y + dy;
+                            if (ny >= 0 && ny < h) { sum += a[ny * w + x]; count++; }
+                        }
+                        b[y * w + x] = sum / count;
+                    }
+                }
+                [a, b] = [b, a];
+            }
+            // Write back
+            for (let i = 0; i < w * h; i++) d[i * 4] = d[i * 4 + 1] = d[i * 4 + 2] = Math.round(a[i]);
+        }
+
+        // Get grayscale pixel data from an image
+        function getGrayData(img) {
+            const c = document.createElement('canvas');
+            c.width = img.naturalWidth;
+            c.height = img.naturalHeight;
+            const ctx = c.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            return ctx.getImageData(0, 0, c.width, c.height);
+        }
+
+        // Find percentile-based min/max gray values in imageData
+        function findMinMax(imageData) {
+            const d = imageData.data;
+            const hist = new Uint32Array(256);
+            let total = 0;
+            for (let i = 0; i < d.length; i += 4) {
+                hist[d[i]]++;
+                total++;
+            }
+            const lo = Math.round(total * 0.10);
+            const hi = Math.round(total * 0.90);
+            let cum = 0, gMin = 0, gMax = 255;
+            for (let v = 0; v < 256; v++) {
+                cum += hist[v];
+                if (cum >= lo && gMin === 0) gMin = v;
+                if (cum >= hi) { gMax = v; break; }
+            }
+            return { gMin, gMax };
+        }
+
+        // Apply jet colormap with given min/max bounds + 10% crop on all sides
+        function applyColormapToCanvas(img, canvas, gMin, gMax) {
+            const cropX = Math.round(img.naturalWidth * 0.20);
+            const cropY = Math.round(img.naturalHeight * 0.20);
+            canvas.width = img.naturalWidth - 2 * cropX;
+            canvas.height = img.naturalHeight - 2 * cropY;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, cropX, cropY, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const d = imageData.data;
+            const range = gMax - gMin || 1;
+            for (let i = 0; i < d.length; i += 4) {
+                const norm = 255 - Math.round(Math.min(255, Math.max(0, ((d[i] - gMin) / range) * 255)));
+                d[i]     = JET[norm * 3];
+                d[i + 1] = JET[norm * 3 + 1];
+                d[i + 2] = JET[norm * 3 + 2];
+            }
+            ctx.putImageData(imageData, 0, 0);
+        }
+
+        // Before/After comparison sliders with colormap
+        document.querySelectorAll('.comparison-slider').forEach(slider => {
+            const before = slider.querySelector('.comparison-before');
+            const handle = slider.querySelector('.comparison-handle');
+            const canvasAfter = slider.querySelector('.cm-after');
+            const canvasBefore = slider.querySelector('.cm-before');
+            const srcBefore = slider.dataset.srcBefore;
+            const srcAfter = slider.dataset.srcAfter;
+            let isDragging = false;
+
+            // Load both images, compute shared min/max, then colormap both
+            if (srcBefore && srcAfter && canvasBefore && canvasAfter) {
+                const imgBefore = new Image();
+                const imgAfter = new Image();
+                let loaded = 0;
+
+                function onBothLoaded() {
+                    // Use H-DIC (after) min/max as reference for both
+                    const mm = findMinMax(getGrayData(imgAfter));
+
+                    applyColormapToCanvas(imgAfter, canvasAfter, mm.gMin, mm.gMax);
+                    applyColormapToCanvas(imgBefore, canvasBefore, mm.gMin, mm.gMax);
+                    canvasBefore.style.minWidth = slider.offsetWidth + 'px';
+                }
+
+                imgBefore.onload = () => { if (++loaded === 2) onBothLoaded(); };
+                imgAfter.onload = () => { if (++loaded === 2) onBothLoaded(); };
+                imgBefore.src = srcBefore;
+                imgAfter.src = srcAfter;
+            }
+
+            function move(x) {
+                const rect = slider.getBoundingClientRect();
+                let pos = (x - rect.left) / rect.width;
+                pos = Math.max(0, Math.min(1, pos));
+                const pct = pos * 100 + '%';
+                before.style.width = pct;
+                handle.style.left = pct;
+            }
+
+            slider.addEventListener('mousedown', (e) => { isDragging = true; move(e.clientX); });
+            window.addEventListener('mousemove', (e) => { if (isDragging) { e.preventDefault(); move(e.clientX); } });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+
+            slider.addEventListener('touchstart', (e) => { isDragging = true; move(e.touches[0].clientX); }, { passive: true });
+            window.addEventListener('touchmove', (e) => { if (isDragging) move(e.touches[0].clientX); }, { passive: true });
+            window.addEventListener('touchend', () => { isDragging = false; });
+
+            // Resize fix
+            window.addEventListener('resize', () => {
+                if (canvasBefore) canvasBefore.style.minWidth = slider.offsetWidth + 'px';
             });
         });
     </script>
