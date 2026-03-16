@@ -299,8 +299,8 @@
 
         .version {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            color: #a0a0b0;
+            background: rgba(255, 255, 255, 0.25);
+            color: #d0d0e0;
             font-size: 0.8rem;
             padding: 0.15rem 0.5rem;
             border-radius: 4px;
@@ -493,7 +493,7 @@
                 </p>
 
                 <!-- Before/After slider: DIC vs H-DIC with jet colormap -->
-                <div class="comparison-slider" data-src-before="screens/displacement_tab_DIC.png" data-src-after="screens/displacement_tab_HDIC.png" style="margin-top: 1.25rem; position: relative; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.12); user-select: none; -webkit-user-select: none; background: #000;">
+                <div class="comparison-slider" data-src-before="screens/displacement_tab_DIC.png" data-src-after="screens/displacement_tab_HDIC.png" style="margin-top: 1.25rem; position: relative; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.12); user-select: none; -webkit-user-select: none; background: #000; max-width: 75%; margin-left: auto; margin-right: auto;">
                     <!-- After canvas (H-DIC) — full width background -->
                     <canvas class="cm-after" style="display: block; width: 100%; height: auto;"></canvas>
                     <!-- Before canvas (DIC) — clipped by slider -->
@@ -739,8 +739,8 @@
                 hist[d[i]]++;
                 total++;
             }
-            const lo = Math.round(total * 0.10);
-            const hi = Math.round(total * 0.90);
+            const lo = Math.round(total * 0.20);
+            const hi = Math.round(total * 0.20);
             let cum = 0, gMin = 0, gMax = 255;
             for (let v = 0; v < 256; v++) {
                 cum += hist[v];
