@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3NQJN0EZEL"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-3NQJN0EZEL');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Argos - Digital Image Correlation Software</title>
@@ -925,6 +917,48 @@
                 if (canvasBefore) canvasBefore.style.minWidth = slider.offsetWidth + 'px';
             });
         });
+    </script>
+    <!-- Cookie consent banner -->
+    <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#1a1a2e; color:#ccc; padding:0.75rem 1.5rem; font-size:0.8rem; z-index:9999; align-items:center; justify-content:center; gap:1rem; flex-wrap:wrap;">
+        <span>This site uses cookies for anonymous analytics.</span>
+        <span style="display:inline-flex; gap:0.5rem;">
+            <button onclick="acceptCookies()" style="background:#fff; color:#1a1a2e; border:none; padding:0.3rem 1rem; border-radius:4px; cursor:pointer; font-size:0.8rem;">Accept</button>
+            <button onclick="declineCookies()" style="background:transparent; color:#888; border:1px solid #555; padding:0.3rem 1rem; border-radius:4px; cursor:pointer; font-size:0.8rem;">Decline</button>
+        </span>
+    </div>
+
+    <script>
+        function loadGA() {
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-3NQJN0EZEL';
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', 'G-3NQJN0EZEL');
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookie-consent', 'accepted');
+            document.getElementById('cookie-banner').style.display = 'none';
+            loadGA();
+        }
+
+        function declineCookies() {
+            localStorage.setItem('cookie-consent', 'declined');
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+
+        (function() {
+            var consent = localStorage.getItem('cookie-consent');
+            if (consent === 'accepted') {
+                loadGA();
+            } else if (!consent) {
+                document.getElementById('cookie-banner').style.display = 'flex';
+            }
+        })();
     </script>
 </body>
 </html>
