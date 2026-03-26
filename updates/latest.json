@@ -1,4 +1,4 @@
 {
-  "version": "1.0.1",
-  "releaseNotes": "Version initiale"
+  "version": "1.0.2",
+  "releaseNotes": "Amélioration de la compatibilité GPU et messages d'erreur CUDA"
 }
