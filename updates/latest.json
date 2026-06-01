@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5",
-  "releaseNotes": "Augmentation de la zone de recherche de 256 px à 1024 px"
+  "version": "1.0.6",
+  "releaseNotes": "Compatibility bug fixes"
 }
