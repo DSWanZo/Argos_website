@@ -353,6 +353,31 @@
             color: #888;
             padding-top: 3px;
         }
+        /* Group of equation terms with a method badge bar underneath.
+           The badge is a sibling in the same column, so it always sits
+           directly under its terms regardless of width or wrapping. */
+        .eq-group {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .eq-terms {
+            display: inline-flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.25rem 0.5rem;
+        }
+        .eq-badge {
+            font-size: 0.7rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 0.15rem 0.6rem;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+        .eq-badge-conv { background: #aab; }
+        .eq-badge-hdic { background: #1a1a2e; }
 
         .version {
             display: inline-block;
@@ -608,26 +633,32 @@
                 </p>
                 <p>The subset shape function is augmented with a jump vector and a Heaviside function:</p>
                 <div class="equation-block" style="background: linear-gradient(135deg, #f8f8fb 0%, #f0f0f8 100%); border-radius: 8px; border-left: 3px solid #1a1a2e; padding: 1.5rem 1rem; margin: 1.25rem 0; font-family: 'Times New Roman', Georgia, serif; color: #1a1a2e;">
-                    <div class="eq-row" style="display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 0.25rem 0.5rem; font-size: 1.15rem; letter-spacing: 0.5px;">
+                    <div class="eq-row" style="display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 0.75rem 0.5rem; font-size: 1.15rem; letter-spacing: 0.5px;">
                         <span><b>&phi;</b>(<b>x</b>) =</span>
-                        <span class="eq-term">
-                            <span class="eq-expr"><b>x</b> + <b>u</b></span>
-                            <span class="eq-label">rigid body</span>
+                        <span class="eq-group">
+                            <span class="eq-terms">
+                                <span class="eq-term">
+                                    <span class="eq-expr"><b>x</b> + <b>u</b></span>
+                                    <span class="eq-label">rigid body</span>
+                                </span>
+                                <span>+</span>
+                                <span class="eq-term">
+                                    <span class="eq-expr"><b>&nabla;u</b> &middot; (<b>x</b> &minus; <b>x</b><sub>0</sub>)</span>
+                                    <span class="eq-label">first gradient</span>
+                                </span>
+                            </span>
+                            <span class="eq-badge eq-badge-conv">Conventional DIC</span>
                         </span>
                         <span>+</span>
-                        <span class="eq-term">
-                            <span class="eq-expr"><b>&nabla;u</b> &middot; (<b>x</b> &minus; <b>x</b><sub>0</sub>)</span>
-                            <span class="eq-label">first gradient</span>
+                        <span class="eq-group">
+                            <span class="eq-terms">
+                                <span class="eq-term">
+                                    <span class="eq-expr"><b>u'</b> &middot; <i>H</i>(<b>x</b> &minus; <b>x</b><sub>0</sub>)</span>
+                                    <span class="eq-label">jump &times; Heaviside</span>
+                                </span>
+                            </span>
+                            <span class="eq-badge eq-badge-hdic">Heaviside-DIC</span>
                         </span>
-                        <span>+</span>
-                        <span class="eq-term">
-                            <span class="eq-expr"><b>u'</b> &middot; <i>H</i>(<b>x</b> &minus; <b>x</b><sub>0</sub>)</span>
-                            <span class="eq-label">jump &times; Heaviside</span>
-                        </span>
-                    </div>
-                    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 0.75rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.7rem;">
-                        <span style="color: #fff; background: #aab; border-radius: 3px; padding: 0.15rem 0.6rem;">Conventional DIC</span>
-                        <span style="color: #fff; background: #1a1a2e; border-radius: 3px; padding: 0.15rem 0.6rem;">Heaviside-DIC</span>
                     </div>
                 </div>
                 <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem;">
