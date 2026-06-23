@@ -1,4 +1,4 @@
 {
-  "version": "1.0.9",
-  "releaseNotes": "Compatibility bug fixes"
+  "version": "1.1.0",
+  "releaseNotes": "- Multi-GPU bug fixes\n- Better memory handling for large images\n- Improved computation performance in the rupture (fracture) phase\n- Minor interface changes (search area)"
 }
