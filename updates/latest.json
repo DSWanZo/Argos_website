@@ -1,4 +1,4 @@
 {
-  "version": "1.1.0",
-  "releaseNotes": "- Multi-GPU bug fixes\n- Better memory handling for large images\n- Improved computation performance in the rupture (fracture) phase\n- Minor interface changes (search area)"
+  "version": "1.1.1",
+  "releaseNotes": "- New non-rigid stitching refinement: local distortion is corrected tile by tile, which removes most of the visible seam lines in mosaics.\n- Fracture tab: improved crack ridge detection and display. Results are more readable and can be customised.\n- New line profile: on any result tab, press the markers button, then drag across the image to plot the field along a segment. Clicking still places a marker.\n- Interface reworked throughout: unified colours, a Help menu and an About box, clearer parameter labels and grouping.\n- PNG and tiled TIFF images can now be read, and a demo dataset ships with the installer.\n- Better stability and computation performance, and various minor bugs addressed."
 }
