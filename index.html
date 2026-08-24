@@ -11,9 +11,58 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Argos - Digital Image Correlation Software</title>
+    <title>Argos &mdash; Digital Image Correlation for Cracks and Discontinuities</title>
+    <meta name="description" content="GPU-accelerated Digital Image Correlation: displacement, strain and crack opening fields, with Heaviside enrichment for discontinuities. Free edition for Windows.">
     <link rel="icon" type="image/svg+xml" href="argos_logo.svg">
+    <link rel="canonical" href="https://argos-correlation.com/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Argos &mdash; GPU-Accelerated DIC with Discontinuity Enrichment">
+    <meta property="og:description" content="Heaviside-enriched shape functions inside the correlation: sharp cracks, twins and slip bands. Free edition available.">
+    <meta property="og:url" content="https://argos-correlation.com/">
+    <meta property="og:image" content="https://argos-correlation.com/screens/strain_HDIC.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ==========================================================
+           JETONS  -- toute couleur et toute taille de texte de la page
+           sortent d'ici. Rien de codé en dur ailleurs.
+
+           L'accent teal n'est dépensé QUE sur le bouton de
+           téléchargement : il est analogue au navy de la marque, donc
+           il s'accorde avec lui au lieu de le concurrencer, et il ne
+           reprend aucune couleur des champs viridis des captures.
+           ========================================================== */
+        :root {
+            --ink:        #171728;   /* navy de marque : titres, bandes sombres */
+            --ink-soft:   #2a2a42;
+            --body:       #4a4a5c;   /* gris légèrement bleuté, pas un gris neutre */
+            --muted:      #7b7b8f;
+            --ground:     #f6f6fa;
+            --surface:    #ffffff;
+            --line:       #e5e5ee;
+            --accent:     #0e7490;
+            --accent-hi:  #0b5c74;
+            --accent-tint:#e7f3f7;
+            --link:       #1d5fbf;
+
+            /* échelle typographique */
+            --t-xs:   0.75rem;
+            --t-sm:   0.8125rem;
+            --t-md:   0.9375rem;
+            --t-base: 1.0625rem;
+            --t-lg:   1.1875rem;
+            --t-xl:   1.5rem;
+            --t-2xl:  clamp(1.6rem, 1.15rem + 1.9vw, 2.1rem);
+            --t-3xl:  clamp(2rem, 1.5rem + 2.2vw, 2.7rem);
+
+            --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -21,18 +70,24 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fafafa;
+            font-family: var(--sans);
+            font-size: var(--t-base);
+            line-height: 1.65;
+            color: var(--body);
+            background-color: var(--ground);
+            -webkit-font-smoothing: antialiased;
+            /* la bande sombre pleine largeur déborde de `main` avec des marges
+               négatives en 100vw : sans ceci, la barre de défilement crée un
+               débordement horizontal de quelques pixels. */
+            overflow-x: hidden;
         }
 
         /* ========== HEADER ========== */
 
         header {
-            background-color: #1a1a2e;
+            background-color: var(--ink);
             color: #fff;
-            padding: 2rem 2rem 0 2rem;
+            padding: 2.5rem 2rem 0 2rem;
             text-align: center;
         }
 
@@ -43,15 +98,21 @@
         }
 
         header h1 {
-            font-size: 2.2rem;
+            font-size: var(--t-3xl);
             font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
             margin-bottom: 0.5rem;
         }
 
         header > p {
-            color: #a0a0b0;
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
+            font-family: var(--mono);
+            font-size: var(--t-sm);
+            font-weight: 400;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #9b9bb2;
+            margin-bottom: 1.75rem;
         }
 
         .tabs {
@@ -64,8 +125,9 @@
             background: transparent;
             border: none;
             color: #a0a0b0;
+            font-family: var(--sans);
             padding: 1rem 2rem;
-            font-size: 1rem;
+            font-size: var(--t-md);
             font-weight: 500;
             cursor: pointer;
             border-bottom: 3px solid transparent;
@@ -142,18 +204,23 @@
         }
 
         .hero h2 {
-            font-size: 1.6rem;
+            font-size: var(--t-2xl);
             font-weight: 600;
-            color: #1a1a2e;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            text-wrap: balance;
+            color: var(--ink);
             border: none;
             padding-bottom: 0;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.9rem;
         }
 
         .hero p {
-            color: #555;
-            font-size: 1.05rem;
-            max-width: 640px;
+            color: var(--body);
+            font-size: var(--t-lg);
+            line-height: 1.55;
+            max-width: 44ch;
+            text-wrap: balance;
             margin: 0 auto 1.5rem auto;
         }
 
@@ -167,11 +234,14 @@
 
         .hero-tag {
             display: inline-block;
-            background: #f0f0f5;
-            color: #1a1a2e;
-            font-size: 0.8rem;
+            background: var(--ground);
+            border: 1px solid var(--line);
+            color: var(--ink);
+            font-family: var(--mono);
+            font-size: var(--t-xs);
             font-weight: 500;
-            padding: 0.3rem 0.75rem;
+            letter-spacing: 0.03em;
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
         }
 
@@ -186,24 +256,34 @@
         }
 
         .feature-section h2 {
-            font-size: 1.3rem;
+            font-size: var(--t-xl);
             font-weight: 600;
-            color: #1a1a2e;
-            margin-bottom: 0.5rem;
+            letter-spacing: -0.015em;
+            line-height: 1.25;
+            text-wrap: balance;
+            color: var(--ink);
+            margin-bottom: 0.35rem;
             padding-bottom: 0;
             border-bottom: none;
         }
 
+        /* Sous-titre de section : ETIQUETTE DE CATEGORIE, pas decoration --
+           elle dit de quel domaine releve la section. Le mono en capitales lui
+           donne cette fonction sans lui donner du poids. */
         .feature-section .section-subtitle {
-            color: #888;
-            font-size: 0.9rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
+            font-family: var(--mono);
+            font-size: var(--t-xs);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1.25rem;
         }
 
         .feature-section p {
             margin-bottom: 0.75rem;
-            color: #555;
+            color: var(--body);
+            max-width: 68ch;
         }
 
         .feature-section ul {
@@ -212,8 +292,9 @@
         }
 
         .feature-section li {
-            margin-bottom: 0.3rem;
-            color: #555;
+            margin-bottom: 0.35rem;
+            color: var(--body);
+            max-width: 66ch;
         }
 
         /* ========== SCREENSHOT PLACEHOLDER ========== */
@@ -253,10 +334,11 @@
         }
 
         .screenshot-caption {
-            background: #f8f8fa;
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-            color: #888;
+            background: var(--ground);
+            padding: 0.55rem 1rem;
+            font-size: var(--t-xs);
+            line-height: 1.5;
+            color: var(--muted);
             text-align: center;
         }
 
@@ -277,14 +359,19 @@
 
         .tech-item strong {
             display: block;
-            font-size: 0.85rem;
-            color: #1a1a2e;
-            margin-bottom: 0.15rem;
+            font-family: var(--mono);
+            font-size: var(--t-xs);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink);
+            margin-bottom: 0.3rem;
         }
 
         .tech-item span {
-            font-size: 0.8rem;
-            color: #777;
+            font-size: var(--t-md);
+            line-height: 1.5;
+            color: var(--body);
         }
 
         /* ========== GET SECTION ========== */
@@ -298,25 +385,27 @@
         }
 
         section h2 {
-            font-size: 1.3rem;
+            font-size: var(--t-xl);
             font-weight: 600;
-            color: #1a1a2e;
+            letter-spacing: -0.015em;
+            color: var(--ink);
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #eee;
+            border-bottom: 1px solid var(--line);
         }
 
         h3 {
-            font-size: 1rem;
+            font-size: var(--t-md);
             font-weight: 600;
-            color: #444;
+            letter-spacing: 0.01em;
+            color: var(--ink);
             margin-top: 1.25rem;
             margin-bottom: 0.5rem;
         }
 
         p {
             margin-bottom: 0.75rem;
-            color: #555;
+            color: var(--body);
         }
 
         ul, ol {
@@ -326,16 +415,36 @@
 
         li {
             margin-bottom: 0.4rem;
-            color: #555;
+            color: var(--body);
         }
 
         a {
-            color: #2563eb;
+            color: var(--link);
             text-decoration: none;
+        }
+
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 3px;
         }
 
         a:hover {
             text-decoration: underline;
+        }
+
+        /* ========== BLOC D'EQUATION ==========
+           Ces regles etaient en STYLE EN LIGNE. Elles n'y pouvaient pas rester :
+           un style en ligne bat n'importe quel selecteur, donc la bande sombre
+           n'avait aucun moyen de les reecrire sans `!important`. */
+        .equation-block {
+            background: linear-gradient(135deg, #f8f8fb 0%, #f0f0f8 100%);
+            border-radius: 8px;
+            border-left: 3px solid var(--ink);
+            padding: 1.5rem 1rem;
+            margin: 1.25rem 0;
+            font-family: 'Times New Roman', Georgia, serif;
+            color: var(--ink);
         }
 
         .eq-term {
@@ -381,12 +490,14 @@
 
         .version {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.15);
             color: #d0d0e0;
-            font-size: 0.8rem;
+            font-family: var(--mono);
+            font-size: var(--t-xs);
+            font-variant-numeric: tabular-nums;
             padding: 0.15rem 0.5rem;
             border-radius: 4px;
-            margin-left: 0.25rem;
+            margin-left: 0.35rem;
             font-weight: 500;
         }
 
@@ -536,6 +647,362 @@
             color: #666;
         }
 
+        /* Note de source : une reference bibliographique n'a pas le poids
+           d'un paragraphe d'argumentaire, elle se donne a lire APRES lui. */
+        .feature-section p.source-note {
+            /* Elle annote le bloc au-dessus, donc elle prend SA largeur. Sans
+               cela elle heritait du plafond de prose de `.feature-section p`
+               (68ch) -- et `ch` se mesure sur la police de l element : a
+               15px ses 68ch font moins de pixels qu a 17px, donc elle revenait
+               a la ligne avant le paragraphe, qui revenait avant le bloc. */
+            max-width: none;
+            font-size: var(--t-md);
+            line-height: 1.55;
+            color: var(--muted);
+            margin-top: 1rem;
+        }
+
+        .feature-section.tone-dark p.source-note { color: #8a8aa2; }
+
+        /* ========== LEGENDES DE FIGURE ==========
+           Une legende n'est PAS de la prose : les bornes de largeur de
+           `.hero p` et `.feature-section p` sont faites pour un paragraphe
+           qu'on lit ligne a ligne. Posees sur une legende centree, elles la
+           serrent dans une boite plus etroite que son image et la calent a
+           gauche, faute de marges auto. Les selecteurs sont scopes pour battre
+           les deux regles de paragraphe, dont la specificite est la meme. */
+        .hero p.fig-caption,
+        .feature-section p.fig-caption {
+            /* Une legende prend la largeur de SA FIGURE, pas une largeur de
+               lecture : son conteneur est deja celui de l'image. Et il lui
+               faut une marge basse -- `.hero p` en portait une de 1.5rem, que
+               la classe avait supprimee en la remplacant. */
+            max-width: none;
+            margin: 0.7rem 0 1.5rem 0;
+            font-size: var(--t-xs);
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--muted);
+            text-align: center;
+            text-wrap: pretty;
+        }
+
+        .fig-caption a {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-color: var(--line);
+            text-underline-offset: 2px;
+        }
+
+        .fig-caption a:hover {
+            color: var(--ink);
+            text-decoration-color: var(--muted);
+        }
+
+        /* ========== TELECHARGEMENT ==========
+           L'accent teal ne sert QUE sur ce bouton. C'est le seul endroit de la
+           page ou une couleur crie ; tout le reste se tait pour lui. */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            font-family: var(--sans);
+            font-size: var(--t-md);
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            padding: 0.85rem 1.6rem;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+        }
+
+        .btn:hover { text-decoration: none; }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 1px 2px rgba(14, 116, 144, 0.35);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hi);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            border-color: var(--line);
+            color: var(--ink);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--ink);
+            color: var(--ink);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .btn:active { transform: translateY(1px); }
+        }
+
+        .btn svg { flex: none; }
+
+        /* Ligne de telechargement du hero */
+        .hero-download {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1.75rem;
+        }
+
+        .hero .download-meta {
+            width: 100%;
+            max-width: none;
+            margin: 0.65rem 0 0 0;
+            font-family: var(--mono);
+            font-size: var(--t-xs);
+            font-variant-numeric: tabular-nums;
+            color: var(--muted);
+            letter-spacing: 0.02em;
+        }
+
+        /* ========== BANDE SOMBRE ==========
+           Une seule sur la page, et delibere : elle casse la repetition des
+           cartes blanches juste avant la demande, et transforme les specs en
+           panneau d'instrument. Le debordement pleine largeur passe par des
+           marges negatives ; `body { overflow-x: hidden }` absorbe la barre de
+           defilement, sans quoi la page defile de quelques pixels de cote. */
+        .feature-section.tone-dark {
+            background: var(--ink);
+            border-radius: 0;
+            box-shadow: none;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+            padding: 3rem max(3.5rem, calc(50vw - 450px + 3.5rem));
+        }
+
+        .feature-section.tone-dark h2 { color: #fff; }
+        .feature-section.tone-dark .section-subtitle { color: #8f8fa8; }
+        .feature-section.tone-dark p,
+        .feature-section.tone-dark li { color: #b9b9cc; }
+
+        /* Le bleu des liens du corps de page n'a pas le contraste voulu sur le
+           navy : sur fond sombre ils passent a un bleu clair. */
+        .feature-section.tone-dark a { color: #8fc7d8; }
+        .feature-section.tone-dark a:hover { color: #b8dfeb; }
+
+        /* L'equation SUR FOND SOMBRE. Le panneau ne reste pas clair : un
+           rectangle blanc pose sur du navy se lit comme un trou, pas comme un
+           panneau eclaire. Il s'assombrit avec la piece, et c'est l'equation
+           qui devient la chose claire. */
+        .feature-section.tone-dark .equation-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-left-color: #8fc7d8;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            color: #f2f2f7;
+        }
+
+        .feature-section.tone-dark .eq-expr { border-bottom-color: rgba(255, 255, 255, 0.3); }
+        .feature-section.tone-dark .eq-label { color: #9a9ab4; }
+
+        /* Les deux pastilles doivent rester DISTINCTES l'une de l'autre, et
+           c'est leur contraste qui porte le sens : l'une est la methode
+           ordinaire, l'autre est la tienne. Sur fond sombre l'ordinaire devient
+           un contour, la tienne devient pleine et claire. */
+        .feature-section.tone-dark .eq-badge-conv {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            color: #a5a5bd;
+        }
+
+        .feature-section.tone-dark .eq-badge-hdic {
+            background: #f2f2f7;
+            color: var(--ink);
+        }
+
+        .feature-section.tone-dark .fig-caption { color: #9494ab; }
+
+        .feature-section.tone-dark .tech-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+        }
+
+        .feature-section.tone-dark .tech-item strong { color: #b8d9e2; }
+        .feature-section.tone-dark .tech-item span { color: #b9b9cc; }
+
+        /* ========== BLOC DE CLOTURE : LES DEUX EDITIONS ========== */
+
+        .editions-section {
+            padding: 2rem 2rem 2.25rem 2rem;
+        }
+
+        .editions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .edition-card {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .edition-card.is-free {
+            border-color: var(--accent);
+            background: var(--accent-tint);
+        }
+
+        .edition-name {
+            font-family: var(--mono);
+            font-size: var(--t-xs);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .edition-card.is-free .edition-name { color: var(--accent-hi); }
+
+        .edition-price {
+            font-size: var(--t-lg);
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+
+        .edition-card p {
+            font-size: var(--t-md);
+            color: var(--body);
+            margin-bottom: 1.25rem;
+        }
+
+        .edition-card .btn {
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .edition-note {
+            margin-top: 1.5rem;
+            padding: 0.9rem 1.1rem;
+            background: var(--ground);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 6px 6px 0;
+            font-size: var(--t-md);
+            color: var(--body);
+        }
+
+        .edition-note strong { color: var(--ink); }
+
+        /* Tableau comparatif ---------------------------------------------
+           Les verdicts sont en mono et centres : une colonne de glyphes
+           alignes se lit d'un coup d'oeil, une colonne de mots se lit ligne
+           a ligne. */
+        .compare-wrap {
+            margin-top: 1.75rem;
+            overflow-x: auto;
+        }
+
+        table.compare {
+            width: 100%;
+            min-width: 520px;
+            border-collapse: collapse;
+            font-size: var(--t-md);
+        }
+
+        table.compare th,
+        table.compare td {
+            padding: 0.7rem 0.9rem;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        table.compare thead th {
+            font-family: var(--mono);
+            font-size: var(--t-xs);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border-bottom: 2px solid var(--ink);
+            white-space: nowrap;
+        }
+
+        table.compare th.col-verdict,
+        table.compare td.col-verdict {
+            width: 8.5rem;
+            text-align: center;
+        }
+
+        table.compare tbody th {
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        table.compare tbody th small {
+            display: block;
+            font-weight: 400;
+            font-size: var(--t-xs);
+            line-height: 1.45;
+            color: var(--muted);
+            margin-top: 0.15rem;
+        }
+
+        table.compare tbody tr:last-child th,
+        table.compare tbody tr:last-child td { border-bottom: none; }
+
+        .yes, .no {
+            font-family: var(--mono);
+            font-size: var(--t-sm);
+            font-weight: 600;
+        }
+
+        .yes { color: var(--accent-hi); }
+        .no  { color: #b6b6c4; }
+
+        /* Le texte du glyphe porte le sens pour un lecteur d'ecran ; le glyphe
+           seul ne dirait rien. */
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* ========== ZONES PLEINE LARGEUR ==========
+           Elles sont QUATRE : l en-tete, les deux bandes sombres, le pied de
+           page -- plus la section About. Elles doivent calculer leur largeur
+           DE LA MEME FACON, sinon celles qui s arretent au bord du contenu
+           laissent voir le fond de page dans la gouttiere de la barre de
+           defilement, la ou les autres peignent par-dessus : `100vw` inclut
+           la barre, la largeur de `body` l exclut.
+
+           Les bandes portent deja ces marges dans leur propre regle ; ici on
+           aligne les trois qui ne les avaient pas. `body { overflow-x: hidden }`
+           absorbe le debordement. */
+        header,
+        footer,
+        .about-section {
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+        }
+
         /* ========== RESPONSIVE ========== */
 
         @media (max-width: 600px) {
@@ -555,6 +1022,22 @@
                 padding: 1.5rem;
             }
 
+            .feature-section.tone-dark {
+                /* 1rem de `main` + 1.5rem de carte : meme ligne que les cartes */
+                padding: 2.25rem 2.5rem;
+            }
+
+            .editions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .editions-section {
+                padding: 1.5rem;
+            }
+
+            .hero-download .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -609,11 +1092,11 @@
                         <div style="position: absolute; top: 0.5rem; left: 0.75rem; background: rgba(0,0,0,0.55); color: #fff; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 3px; z-index: 1;">Standard DIC</div>
                         <div style="position: absolute; top: 0.5rem; right: 0.75rem; background: rgba(26,26,46,0.75); color: #fff; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 3px; z-index: 1;">Heaviside-DIC</div>
                     </div>
-                    <p style="margin-top: 0.5rem; font-size: 0.75rem; color: #8888aa; font-style: italic; line-height: 1.4; text-align: center;">
+                    <p class="fig-caption">
                         <span id="field-caption">Strain field magnitude</span> computed on the multi-modal dataset of
                         J.C. Stinville, J.M. Hestroffer, M.A. Charpagne, A.T. Polonsky, M.P. Echlin, C.J. Torbet, V. Valle,
                         K.E. Nygren, M.P. Miller, O. Klaas, A. Loghin, I.J. Beyerlein, T.M. Pollock,
-                        <a href="https://doi.org/10.1038/s41597-022-01525-w" style="color: #9999cc;" target="_blank"><em>Scientific Data</em> 9 (2022) 460</a>.
+                        <a href="https://doi.org/10.1038/s41597-022-01525-w" target="_blank" rel="noopener"><em>Scientific Data</em> 9 (2022) 460</a>.
                     </p>
                 </div>
                 <div class="hero-tags">
@@ -621,10 +1104,31 @@
                     <span class="hero-tag">Multi-GPU compatible</span>
                     <span class="hero-tag">Interactive visualization</span>
                 </div>
+
+                <!-- =====================================================
+                     L'URL DE TELECHARGEMENT N'EST ECRITE QU'ICI.
+                     Le meme href est repris plus bas par la carte "Free
+                     edition" : les deux portent la classe js-download, et le
+                     script de bas de page recopie CELUI-CI dans l'autre. Une
+                     seule adresse a changer le jour de la mise en ligne S3.
+                     ===================================================== -->
+                <div class="hero-download">
+                    <a class="btn btn-primary js-download"
+                       href="https://argos2d-free.s3.eu-west-3.amazonaws.com/Argos2D_Free_v1.1.0_Setup.exe"
+                       data-edition="free"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v9m0 0L4.5 6.5M8 10l3.5-3.5M2 12.5v1A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Download free edition</a>
+                    <a class="btn btn-secondary" href="#editions">Compare editions</a>
+                    <p class="download-meta">
+                        Windows 10/11 &middot; 64-bit &middot; no license key, no time limit
+                    </p>
+                </div>
             </div>
 
-            <!-- ==================== 1. HEAVISIDE ENRICHMENT ==================== -->
-            <div class="feature-section">
+            <!-- ==================== 1. HEAVISIDE ENRICHMENT ====================
+                 Sombre, comme « Under the Hood » : ce sont les deux seules
+                 sections qui expliquent le fonctionnement -- le modele ici,
+                 son implementation la-bas. Les quatre autres montrent des
+                 resultats et restent claires. -->
+            <div class="feature-section tone-dark">
                 <h2>Heaviside-Enriched Displacement Fields</h2>
                 <p>
                     Standard DIC assumes continuous displacement inside each subset, which smears out
@@ -632,7 +1136,7 @@
                     correlation model, allowing a sharp jump to be identified <em>within</em> each subset.
                 </p>
                 <p>The subset shape function is augmented with a jump vector and a Heaviside function:</p>
-                <div class="equation-block" style="background: linear-gradient(135deg, #f8f8fb 0%, #f0f0f8 100%); border-radius: 8px; border-left: 3px solid #1a1a2e; padding: 1.5rem 1rem; margin: 1.25rem 0; font-family: 'Times New Roman', Georgia, serif; color: #1a1a2e;">
+                <div class="equation-block">
                     <div class="eq-row" style="display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 0.75rem 0.5rem; font-size: 1.15rem; letter-spacing: 0.5px;">
                         <span><b>&phi;</b>(<b>x</b>) =</span>
                         <span class="eq-group">
@@ -661,7 +1165,7 @@
                         </span>
                     </div>
                 </div>
-                <p style="font-size: 0.85rem; color: #888; margin-top: 0.5rem;">
+                <p class="source-note">
                     Based on: F. Bourdin, J.C. Stinville, M.P. Echlin, P.G. Callahan, W.C. Lenthe, C.J. Torbet,
                     D. Texier, F. Bridier, J. Cormier, P. Villechaise, T.M. Pollock, V. Valle,
                     <em>Measurements of plastic localization by heaviside-digital image correlation</em>,
@@ -676,10 +1180,10 @@
                 <p class="section-subtitle">A full GUI to set up correlations and explore the results.</p>
                 <div style="margin-top: 1.25rem;">
                     <img src="screens/GUI.png" alt="Argos2D interface — displacement field with Heaviside enrichment" style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
-                    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #888; font-style: italic; line-height: 1.5; text-align: center;">
+                    <p class="fig-caption">
                         Dataset from J.C. Stinville, J.M. Hestroffer, M.A. Charpagne, A.T. Polonsky, M.P. Echlin, C.J. Torbet, V. Valle,
                         K.E. Nygren, M.P. Miller, O. Klaas, A. Loghin, I.J. Beyerlein, T.M. Pollock,
-                        <a href="https://doi.org/10.1038/s41597-022-01525-w" style="color: #6a6aaa;" target="_blank"><em>Scientific Data</em> 9 (2022) 460</a>.
+                        <a href="https://doi.org/10.1038/s41597-022-01525-w" target="_blank" rel="noopener"><em>Scientific Data</em> 9 (2022) 460</a>.
                     </p>
                 </div>
             </div>
@@ -696,10 +1200,10 @@
 
                 <div style="margin-top: 1.25rem;">
                     <img src="screens/fracture_tab1.png" alt="Argos2D — Fracture tab showing crack opening fields" style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
-                    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #888; font-style: italic; line-height: 1.5; text-align: center;">
+                    <p class="fig-caption">
                         Dataset from J.C. Stinville, J.M. Hestroffer, M.A. Charpagne, A.T. Polonsky, M.P. Echlin, C.J. Torbet, V. Valle,
                         K.E. Nygren, M.P. Miller, O. Klaas, A. Loghin, I.J. Beyerlein, T.M. Pollock,
-                        <a href="https://doi.org/10.1038/s41597-022-01525-w" style="color: #6a6aaa;" target="_blank"><em>Scientific Data</em> 9 (2022) 460</a>.
+                        <a href="https://doi.org/10.1038/s41597-022-01525-w" target="_blank" rel="noopener"><em>Scientific Data</em> 9 (2022) 460</a>.
                     </p>
                 </div>
             </div>
@@ -719,10 +1223,10 @@
 
                 <div style="margin-top: 1.25rem;">
                     <img src="screens/strain_tab2.png" alt="Argos2D — Strain tab with kernel selector and custom criterion editor" style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
-                    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #888; font-style: italic; line-height: 1.5; text-align: center;">
+                    <p class="fig-caption">
                         Dataset from J.C. Stinville, J.M. Hestroffer, M.A. Charpagne, A.T. Polonsky, M.P. Echlin, C.J. Torbet, V. Valle,
                         K.E. Nygren, M.P. Miller, O. Klaas, A. Loghin, I.J. Beyerlein, T.M. Pollock,
-                        <a href="https://doi.org/10.1038/s41597-022-01525-w" style="color: #6a6aaa;" target="_blank"><em>Scientific Data</em> 9 (2022) 460</a>.
+                        <a href="https://doi.org/10.1038/s41597-022-01525-w" target="_blank" rel="noopener"><em>Scientific Data</em> 9 (2022) 460</a>.
                     </p>
                 </div>
             </div>
@@ -741,18 +1245,21 @@
 
                 <div style="margin-top: 1.25rem;">
                     <img src="screens/mosaic_tab.png" alt="Argos2D — Mosaic stitching mode" style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
-                    <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #888; font-style: italic; line-height: 1.5; text-align: center;">
+                    <p class="fig-caption">
                         Dataset from J.C. Stinville, J.M. Hestroffer, M.A. Charpagne, A.T. Polonsky, M.P. Echlin, C.J. Torbet, V. Valle,
                         K.E. Nygren, M.P. Miller, O. Klaas, A. Loghin, I.J. Beyerlein, T.M. Pollock,
-                        <a href="https://doi.org/10.1038/s41597-022-01525-w" style="color: #6a6aaa;" target="_blank"><em>Scientific Data</em> 9 (2022) 460</a>.
+                        <a href="https://doi.org/10.1038/s41597-022-01525-w" target="_blank" rel="noopener"><em>Scientific Data</em> 9 (2022) 460</a>.
                     </p>
                 </div>
             </div>
 
-            <!-- ==================== 6. UNDER THE HOOD ==================== -->
-            <div class="feature-section">
+            <!-- ==================== 6. UNDER THE HOOD ====================
+                 Seule bande sombre de la page, et pleine largeur : elle casse
+                 la suite des cartes blanches au moment ou le lecteur a fini
+                 l'argumentaire, juste avant qu'on lui demande quelque chose. -->
+            <div class="feature-section tone-dark">
                 <h2>Under the Hood</h2>
-                <p class="section-subtitle">Core engine specifications.</p>
+                <p class="section-subtitle">Core engine specifications</p>
                 <div class="tech-grid">
                     <div class="tech-item">
                         <strong>GPU Correlation</strong>
@@ -773,13 +1280,113 @@
                 </div>
             </div>
 
-            <!-- ==================== GET ARGOS2D ==================== -->
-            <section>
+            <!-- ==================== GET ARGOS2D ====================
+                 Le bloc de cloture porte les deux chemins cote a cote, puis le
+                 tableau qui les departage. C'est ici que la decision se prend,
+                 donc c'est ici que le tableau sert -- le mettre en haut de page
+                 ferait choisir avant d'avoir convaincu. -->
+            <section class="editions-section" id="editions">
                 <h2>Get Argos2D</h2>
-                <p>
-                    To request a license or try Argos2D, contact us:
-                    <a href="mailto:contact@argos-correlation.com">contact@argos-correlation.com</a>
+
+                <div class="editions-grid">
+                    <div class="edition-card is-free">
+                        <span class="edition-name">Free edition</span>
+                        <span class="edition-price">Free, no time limit</span>
+                        <p>
+                            The full correlation engine: displacement, strain and every
+                            correlation parameter. No license key required.
+                        </p>
+                        <a class="btn btn-primary js-download"
+                           href="https://argos2d-free.s3.eu-west-3.amazonaws.com/Argos2D_Free_v1.1.0_Setup.exe"
+                           data-edition="free"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v9m0 0L4.5 6.5M8 10l3.5-3.5M2 12.5v1A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Download free edition</a>
+                    </div>
+
+                    <div class="edition-card">
+                        <span class="edition-name">Full edition</span>
+                        <span class="edition-price">License key</span>
+                        <p>
+                            Everything in the free edition, plus Heaviside enrichment,
+                            the fracture tab and mosaic stitching.
+                        </p>
+                        <a class="btn btn-secondary"
+                           href="mailto:contact@argos-correlation.com?subject=Argos2D%20license%20request">Request a license</a>
+                    </div>
+                </div>
+
+                <p class="edition-note">
+                    <strong>Already have a key?</strong> Install the free edition and open
+                    <em>Help &rarr; About Argos2D &rarr; Activate full edition</em>. Argos2D validates
+                    your key online, then downloads and installs the full edition over the current
+                    one &mdash; same folder, settings kept, nothing to uninstall first.
                 </p>
+
+                <div class="compare-wrap">
+                    <table class="compare">
+                        <thead>
+                            <tr>
+                                <th scope="col">Feature</th>
+                                <th scope="col" class="col-verdict">Free</th>
+                                <th scope="col" class="col-verdict">Full</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Correlation engine
+                                    <small>CUDA-native, multi-GPU, hierarchical and FFT pixel search</small></th>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Displacement fields
+                                    <small>Sub-pixel IC-GN, bilinear / bicubic / B-spline interpolation</small></th>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Strain post-processing
+                                    <small>Full tensor, selectable gradient kernels, custom strain criteria</small></th>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Complete parameter set
+                                    <small>Subset, spacing, search area, NLC filter, ROI and mask, GPU selection</small></th>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Image series and field export
+                                    <small>Reference plus any number of deformed images; every field exported to TIFF</small></th>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Heaviside enrichment
+                                    <small>Discontinuity captured inside the subset; twinning mode</small></th>
+                                <td class="col-verdict"><span class="no" aria-hidden="true">&mdash;</span><span class="sr-only">not included</span></td>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Fracture tab
+                                    <small>Crack opening and direction, crack angle, screw / edge decomposition</small></th>
+                                <td class="col-verdict"><span class="no" aria-hidden="true">&mdash;</span><span class="sr-only">not included</span></td>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Mosaic stitching
+                                    <small>Multi-tile assembly, global position optimisation, batch mode</small></th>
+                                <td class="col-verdict"><span class="no" aria-hidden="true">&mdash;</span><span class="sr-only">not included</span></td>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">In-app update notifications
+                                    <small>Downloading an update requires a license key</small></th>
+                                <td class="col-verdict"><span class="no" aria-hidden="true">&mdash;</span><span class="sr-only">not included</span></td>
+                                <td class="col-verdict"><span class="yes" aria-hidden="true">&#9679;</span><span class="sr-only">included</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <h3>System requirements</h3>
                 <ul>
@@ -787,6 +1394,10 @@
                     <li>NVIDIA GPU (minimum: Turing generation, e.g. GTX 16xx / RTX 20xx)</li>
                 </ul>
 
+                <p style="font-size: var(--t-md); margin-top: 1rem;">
+                    Questions, quotes, academic pricing:
+                    <a href="mailto:contact@argos-correlation.com">contact@argos-correlation.com</a>
+                </p>
             </section>
 
         </main>
@@ -835,6 +1446,52 @@
     </footer>
 
     <script>
+        // ---------------------------------------------------------------
+        // Numero de version : lu dans updates/latest.json, le fichier que
+        // consultent deja les clients installes. Les deux avaient derive
+        // parce que la pastille etait une chaine ecrite en dur -- elle l'est
+        // encore, mais comme REPLI : si le fetch echoue, la page affiche
+        // l'ancienne valeur au lieu de rien.
+        //
+        // A savoir : latest.json porte la version de l'EDITION COMPLETE. Si un
+        // jour l'installeur gratuit prend du retard sur elle, la pastille dira
+        // la complete pendant que le bouton servira l'ancienne gratuite.
+        // ---------------------------------------------------------------
+        fetch('updates/latest.json')
+            .then(r => r.ok ? r.json() : Promise.reject())
+            .then(j => {
+                if (!j || !j.version) return;
+                document.querySelectorAll('.version').forEach(el => {
+                    el.textContent = 'v' + j.version;
+                });
+            })
+            .catch(() => {});
+
+        // ---------------------------------------------------------------
+        // Une seule adresse de telechargement. Les liens portent tous le vrai
+        // href en dur, donc ils fonctionnent sans JavaScript ; le script se
+        // contente d'aligner les suivants sur le PREMIER, pour qu'une adresse
+        // changee a un seul endroit ne laisse pas l'autre en arriere.
+        // ---------------------------------------------------------------
+        (function () {
+            const links = document.querySelectorAll('.js-download');
+            if (!links.length) return;
+            const url = links[0].getAttribute('href');
+            links.forEach(a => {
+                a.setAttribute('href', url);
+                // Compte les telechargements en attendant la capture d'adresse
+                // e-mail : ca ne donne pas qui, ca donne combien.
+                a.addEventListener('click', () => {
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'download', {
+                            edition: a.dataset.edition || 'free',
+                            file_name: url.split('/').pop()
+                        });
+                    }
+                });
+            });
+        })();
+
         // Tab switching
         document.querySelectorAll('.tab-button').forEach(button => {
             button.addEventListener('click', () => {
