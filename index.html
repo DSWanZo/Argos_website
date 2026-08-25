@@ -913,6 +913,89 @@
 
         .edition-note strong { color: var(--ink); }
 
+        /* Citation academique -------------------------------------------
+           Volontairement DISCRET, et place ici plutot que sur la carte de
+           telechargement : une mention de citation accolee au bouton se lit
+           comme une condition posee au telechargement, ce qu'elle n'est pas.
+           Ici, elle est lue par qui redige, au moment ou il redige.
+           Aucun accent : celui-ci reste depense sur le seul bouton. */
+        .cite-section {
+            padding: 3rem 0 1rem;
+            background: var(--ground);
+            border-top: 1px solid var(--line);
+        }
+
+        .cite-content {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .cite-content h2 {
+            font-size: var(--t-xl);
+            color: var(--ink);
+            margin-bottom: 0.6rem;
+        }
+
+        .cite-lead {
+            color: var(--body);
+            font-size: var(--t-md);
+            margin-bottom: 1.2rem;
+        }
+
+        .cite-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 0.9rem 1rem;
+        }
+
+        .cite-text {
+            flex: 1;
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+            font-size: var(--t-sm);
+            line-height: 1.6;
+            color: var(--ink-soft);
+            word-break: break-word;
+        }
+
+        .cite-copy {
+            flex: none;
+            border: 1px solid var(--line);
+            background: var(--ground);
+            color: var(--body);
+            border-radius: 5px;
+            padding: 0.35rem 0.7rem;
+            font-size: var(--t-xs);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .cite-copy:hover { border-color: var(--accent); color: var(--accent-hi); }
+
+        .cite-more { margin-top: 1rem; }
+
+        .cite-more summary {
+            cursor: pointer;
+            color: var(--body);
+            font-size: var(--t-sm);
+        }
+
+        .cite-more pre {
+            margin-top: 0.7rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 0.9rem 1rem;
+            overflow-x: auto;
+            font-size: var(--t-xs);
+            line-height: 1.55;
+            color: var(--ink-soft);
+        }
+
         /* Tableau comparatif ---------------------------------------------
            Les verdicts sont en mono et centres : une colonne de glyphes
            alignes se lit d'un coup d'oeil, une colonne de mots se lit ligne
@@ -1555,6 +1638,45 @@
         </main>
     </div>
 
+
+    <!-- =====================================================
+         CITATION ACADEMIQUE
+         Une DEMANDE, jamais une condition : rien dans la licence n'y est
+         subordonne pour l'edition gratuite, et l'article 6.2 du CLUF donne
+         de toute facon au client tous les droits sur ses resultats.
+         Formule dite d'un SEUL endroit -- si chacun invente la sienne, les
+         citations ne s'agregent plus et deviennent introuvables.
+         A GARDER D'ACCORD avec l'article 5.2 des conditions de l'edition
+         gratuite (apps/gui/eula_dialog.hpp) et l'article 16.4 du CLUF payant.
+         DOI : quand le depot Zenodo existera, l'ajouter a la fin des deux
+         formules ci-dessous ET dans les deux textes de licence.
+         ===================================================== -->
+    <section class="cite-section" id="cite">
+        <div class="cite-content">
+            <h2>Citing Argos2D</h2>
+            <p class="cite-lead">
+                If Argos2D contributed to published work, please cite it. It is a
+                request and not a condition &mdash; your results are yours either way
+                &mdash; but citations are how an independently developed research tool
+                reaches the next laboratory.
+            </p>
+            <div class="cite-box">
+                <span class="cite-text" id="cite-plain">Wantz, S. (2026). Argos2D (Version 1.1.1) [Computer software]. Sam'Strain. https://argos-correlation.com</span>
+                <button type="button" class="cite-copy" data-cite-copy="cite-plain">Copy</button>
+            </div>
+            <details class="cite-more">
+                <summary>BibTeX</summary>
+<pre id="cite-bibtex">@software{wantz_argos2d,
+  author  = {Wantz, Samuel},
+  title   = {{Argos2D}},
+  version = {1.1.1},
+  year    = {2026},
+  url     = {https://argos-correlation.com}
+}</pre>
+            </details>
+        </div>
+    </section>
+
     <section class="about-section" id="about">
         <div class="about-content">
             <h2>About the Author</h2>
@@ -1797,6 +1919,37 @@
             // Resize fix
             window.addEventListener('resize', sizeBefore);
         });
+    </script>
+
+    <script>
+      /* Copie de la citation. Le repli sur execCommand n'est pas du zele :
+         navigator.clipboard exige un contexte securise, et la page est parfois
+         ouverte en local (file://) par qui teste avant mise en ligne. */
+      document.querySelectorAll('[data-cite-copy]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var el = document.getElementById(btn.getAttribute('data-cite-copy'));
+          if (!el) return;
+          var text = el.textContent.trim();
+          var done = function () {
+            var old = btn.textContent;
+            btn.textContent = 'Copied';
+            setTimeout(function () { btn.textContent = old; }, 1600);
+          };
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(done, function () {});
+          } else {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'absolute';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); done(); } catch (e) {}
+            document.body.removeChild(ta);
+          }
+        });
+      });
     </script>
 </body>
 </html>
