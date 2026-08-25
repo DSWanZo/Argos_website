@@ -1648,8 +1648,14 @@
          citations ne s'agregent plus et deviennent introuvables.
          A GARDER D'ACCORD avec l'article 5.2 des conditions de l'edition
          gratuite (apps/gui/eula_dialog.hpp) et l'article 16.4 du CLUF payant.
-         DOI : quand le depot Zenodo existera, l'ajouter a la fin des deux
-         formules ci-dessous ET dans les deux textes de licence.
+         DOI : c'est le DOI DE CONCEPT (10.5281/zenodo.22099000), jamais celui
+         d'une version. Il designe Argos2D toutes versions confondues et resout
+         toujours vers la derniere publiee, donc il ne se perime pas. Y mettre le
+         DOI de version (…22099001 pour la 1.1.1) le perimerait a la publication
+         suivante, ici et dans les deux textes de licence.
+         Le NUMERO DE VERSION, lui, est en dur dans la formule et dans le BibTeX
+         ci-dessous : il est a bumper a chaque publication, et le guide de
+         distribution le rappelle a l'etape 1.
          ===================================================== -->
     <section class="cite-section" id="cite">
         <div class="cite-content">
@@ -1661,17 +1667,19 @@
                 reaches the next laboratory.
             </p>
             <div class="cite-box">
-                <span class="cite-text" id="cite-plain">Wantz, S. (2026). Argos2D (Version 1.1.1) [Computer software]. Sam'Strain. https://argos-correlation.com</span>
+                <span class="cite-text" id="cite-plain">Wantz, S. (2026). Argos2D (Version 1.1.1) [Computer software]. Sam'Strain. <a href="https://doi.org/10.5281/zenodo.22099000" target="_blank" rel="noopener">https://doi.org/10.5281/zenodo.22099000</a></span>
                 <button type="button" class="cite-copy" data-cite-copy="cite-plain">Copy</button>
             </div>
             <details class="cite-more">
                 <summary>BibTeX</summary>
 <pre id="cite-bibtex">@software{wantz_argos2d,
-  author  = {Wantz, Samuel},
-  title   = {{Argos2D}},
-  version = {1.1.1},
-  year    = {2026},
-  url     = {https://argos-correlation.com}
+  author    = {Wantz, Samuel},
+  title     = {{Argos2D}},
+  version   = {1.1.1},
+  year      = {2026},
+  publisher = {Sam'Strain},
+  doi       = {10.5281/zenodo.22099000},
+  url       = {https://doi.org/10.5281/zenodo.22099000}
 }</pre>
             </details>
         </div>
