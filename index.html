@@ -747,6 +747,7 @@
             display: block;
             font-size: var(--t-lg);
             font-weight: 600;
+            margin-top: 0;
             color: var(--ink);
             margin-bottom: 0.4rem;
             letter-spacing: -0.01em;
@@ -765,15 +766,30 @@
            cela, elles se lisent dans la meme foulee que la phrase et l'argument
            se noie dans les noms d'auteurs. C'est ce que faisaient les deux notes
            successives d'avant. */
+        /* Les deux references sont de NATURES DIFFERENTES : l'une etablit la
+           methode, l'autre l'emploie. Rendues a l'identique, il fallait lire
+           jusqu'au bout de la ligne pour savoir laquelle etait celle de Science.
+           Une colonne d'etiquettes le dit d'un coup d'oeil, et donne au bloc le
+           rythme a deux colonnes qui lui manquait. */
         .mis-ref {
-            display: block;
-            margin: 0.25rem 0 0.8rem 0;
+            display: flex;
+            gap: 0.9rem;
+            margin: 0.5rem 0 0 0;
             font-size: var(--t-sm);
             line-height: 1.5;
             opacity: 0.72;
         }
 
-        .mis-ref:last-child { margin-bottom: 0; }
+        .mis-tag {
+            flex: none;
+            width: 4.6rem;
+            font-family: var(--mono);
+            font-size: var(--t-xs);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding-top: 0.1rem;
+            opacity: 0.75;
+        }
 
         /* ========== LEGENDES DE FIGURE ==========
            Une legende n'est PAS de la prose : les bornes de largeur de
@@ -1349,6 +1365,11 @@
                quatre lignes. */
             .eq-row { font-size: 1.2rem; }
 
+            /* Sous 600px, une colonne fixe de 4.6rem mange trop de largeur :
+               l'etiquette passe au-dessus de sa reference. */
+            .mis-ref { flex-direction: column; gap: 0.15rem; }
+            .mis-tag { width: auto; }
+
             .tech-grid {
                 grid-template-columns: 1fr;
             }
@@ -1512,14 +1533,20 @@
                     <span class="mis-lead">Used in <em>Science</em></span>
                     Developed by V.&nbsp;Valle and co-workers at Institut&nbsp;PPRIME,
                     Universit&eacute; de Poitiers.
-                    <span class="mis-ref">F.&nbsp;Bourdin <em>et&nbsp;al.</em>, <em>Measurements of plastic
-                    localization by heaviside-digital image correlation</em>, Acta&nbsp;Materialia
-                    <b>157</b> (2018) 307&ndash;325.
-                    <a href="https://doi.org/10.1016/j.actamat.2018.07.013" target="_blank" rel="noopener">DOI</a></span>
-                    <span class="mis-ref">J.C.&nbsp;Stinville <em>et&nbsp;al.</em>, <em>On the origins of
-                    fatigue strength in crystalline metallic materials</em>, <b>Science</b>
-                    <b>377</b> (2022) 1065&ndash;1071.
-                    <a href="https://doi.org/10.1126/science.abn0392" target="_blank" rel="noopener">DOI</a></span>
+                    <span class="mis-ref">
+                        <span class="mis-tag">Method</span>
+                        <span>F.&nbsp;Bourdin <em>et&nbsp;al.</em>, <em>Measurements of plastic
+                        localization by heaviside-digital image correlation</em>, Acta&nbsp;Materialia
+                        <b>157</b> (2018) 307&ndash;325.
+                        <a href="https://doi.org/10.1016/j.actamat.2018.07.013" target="_blank" rel="noopener">DOI</a></span>
+                    </span>
+                    <span class="mis-ref">
+                        <span class="mis-tag">Applied</span>
+                        <span>J.C.&nbsp;Stinville <em>et&nbsp;al.</em>, <em>On the origins of
+                        fatigue strength in crystalline metallic materials</em>, <b>Science</b>
+                        <b>377</b> (2022) 1065&ndash;1071.
+                        <a href="https://doi.org/10.1126/science.abn0392" target="_blank" rel="noopener">DOI</a></span>
+                    </span>
                 </p>
             </div>
 
