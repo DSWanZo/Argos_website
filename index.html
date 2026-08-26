@@ -683,6 +683,48 @@
 
         .feature-section.tone-dark p.source-note { color: #8a8aa2; }
 
+        /* ========== LA METHODE, DANS SCIENCE ==========
+           Ce bloc met en avant l'APPLICATION publiee de la methode, et le sujet
+           grammatical de sa phrase d'accroche est « the method », jamais Argos2D.
+           C'est toute la difference entre un fait verifiable et une
+           appropriation : l'article de Science n'a pas ete produit avec ce
+           logiciel, il emploie la methode que ce logiciel implemente.
+           Il suit la note « Based on: … » plutot que de la remplacer : l'ordre
+           equation, article de METHODE, puis application, se lit tout seul. */
+        .feature-section p.method-in-science {
+            /* Meme raison que .source-note juste au-dessus : elle annote le bloc,
+               donc elle prend SA largeur et non le plafond de prose de 68ch. */
+            max-width: none;
+            margin-top: 1.25rem;
+            padding: 0.95rem 1.15rem;
+            background: var(--ground);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 6px 6px 0;
+            font-size: var(--t-md);
+            line-height: 1.55;
+            color: var(--body);
+        }
+
+        .mis-lead {
+            display: block;
+            font-size: var(--t-lg);
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        /* La section rupture est en tone-dark : un encadre clair y jurerait.
+           Un voile blanc tres faible suffit a le detacher du navy, et le filet
+           reprend le bleu clair deja utilise par les liens sur fond sombre. */
+        .feature-section.tone-dark p.method-in-science {
+            background: rgba(255, 255, 255, 0.05);
+            border-left-color: #8fc7d8;
+            color: #b9b9cc;
+        }
+
+        .feature-section.tone-dark .mis-lead { color: #f2f2f7; }
+
         /* ========== LEGENDES DE FIGURE ==========
            Une legende n'est PAS de la prose : les bornes de largeur de
            `.hero p` et `.feature-section p` sont faites pour un paragraphe
@@ -1409,6 +1451,15 @@
                     <em>Measurements of plastic localization by heaviside-digital image correlation</em>,
                     Acta Materialia, Vol.&nbsp;157, pp.&nbsp;307&ndash;325, 2018.
                     <a href="https://doi.org/10.1016/j.actamat.2018.07.013" target="_blank" rel="noopener">DOI</a>
+                </p>
+                <p class="method-in-science">
+                    <span class="mis-lead">The method, in <em>Science</em>.</span>
+                    The same Heaviside-DIC resolves the slip-band offsets measured in
+                    J.C.&nbsp;Stinville, M.A.&nbsp;Charpagne, A.&nbsp;Cervellon, S.&nbsp;Hemery,
+                    F.&nbsp;Wang, P.G.&nbsp;Callahan, V.&nbsp;Valle, T.M.&nbsp;Pollock,
+                    <em>On the origins of fatigue strength in crystalline metallic materials</em>,
+                    Science, Vol.&nbsp;377, No.&nbsp;6610, pp.&nbsp;1065&ndash;1071, 2022.
+                    <a href="https://doi.org/10.1126/science.abn0392" target="_blank" rel="noopener">DOI</a>
                 </p>
             </div>
 
