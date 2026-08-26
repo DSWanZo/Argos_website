@@ -486,6 +486,22 @@
             color: var(--ink);
         }
 
+        /* L'equation est le sujet de la section, donc elle en est le plus gros
+           element apres le titre. Ces regles vivaient dans un attribut style sur
+           le div ; les sortir permet de les faire varier avec la largeur, ce
+           qu'un attribut ne sait pas faire.
+           1.5rem contre 1.15rem auparavant : a l'ancienne taille elle se lisait
+           comme une legende de plus au milieu du panneau. */
+        .eq-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.9rem 0.6rem;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
         .eq-term {
             display: inline-flex;
             flex-direction: column;
@@ -1328,6 +1344,11 @@
         /* ========== RESPONSIVE ========== */
 
         @media (max-width: 600px) {
+            /* A 1.5rem l'equation deborderait : elle se replie deja par
+               flex-wrap, mais autant qu'elle reste lisible sans casser en
+               quatre lignes. */
+            .eq-row { font-size: 1.2rem; }
+
             .tech-grid {
                 grid-template-columns: 1fr;
             }
@@ -1459,7 +1480,7 @@
                 </p>
                 <p>The subset shape function is augmented with a jump vector and a Heaviside function:</p>
                 <div class="equation-block">
-                    <div class="eq-row" style="display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 0.75rem 0.5rem; font-size: 1.15rem; letter-spacing: 0.5px;">
+                    <div class="eq-row">
                         <span><b>&phi;</b>(<b>x</b>) =</span>
                         <span class="eq-group eq-group--conv">
                             <span class="eq-terms">
@@ -1489,14 +1510,14 @@
                 </div>
                 <p class="method-in-science">
                     <span class="mis-lead">The method, in <em>Science</em>.</span>
-                    Heaviside-DIC was developed by <strong>V.&nbsp;Valle</strong> and co-workers at
+                    Heaviside-DIC was developed by V.&nbsp;Valle and co-workers at
                     Institut&nbsp;PPRIME, Universit&eacute; de Poitiers.
                     <span class="mis-ref">F.&nbsp;Bourdin <em>et&nbsp;al.</em>, <em>Measurements of plastic
                     localization by heaviside-digital image correlation</em>, Acta&nbsp;Materialia
                     <b>157</b> (2018) 307&ndash;325.
                     <a href="https://doi.org/10.1016/j.actamat.2018.07.013" target="_blank" rel="noopener">DOI</a></span>
                     It is the method behind the slip-band offsets measured for the fatigue-strength
-                    study published in <em>Science</em>.
+                    study published in <strong><em>Science</em></strong>.
                     <span class="mis-ref">J.C.&nbsp;Stinville <em>et&nbsp;al.</em>, <em>On the origins of
                     fatigue strength in crystalline metallic materials</em>, Science
                     <b>377</b> (2022) 1065&ndash;1071.
