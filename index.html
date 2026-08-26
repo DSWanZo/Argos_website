@@ -682,11 +682,15 @@
                page : `ch` se mesure sur la police de L'ELEMENT, donc la meme
                valeur donne des largeurs differentes selon la taille du texte. */
             max-width: none;
-            margin-top: 1.25rem;
-            padding: 0.95rem 1.15rem;
-            background: var(--ground);
-            border-left: 3px solid var(--accent);
-            border-radius: 0 6px 6px 0;
+            /* PAS de fond ni de cadre, et c'est le point. En tone-dark,
+               .equation-block vaut rgba(255,255,255,0.05) avec un filet gauche de
+               3px : lui donner les memes valeurs faisait DEUX PANNEAUX JUMEAUX
+               empiles, que l'oeil lit comme deux contenus de meme rang. Or celui-ci
+               ANNOTE l'autre. Un simple filet fin suffit a le rattacher a
+               l'equation sans lui disputer son poids. */
+            margin-top: 1.5rem;
+            padding: 0 0 0 1.1rem;
+            border-left: 2px solid rgba(143, 199, 216, 0.45);
             font-size: var(--t-md);
             line-height: 1.55;
             color: var(--body);
@@ -705,8 +709,6 @@
            Un voile blanc tres faible suffit a le detacher du navy, et le filet
            reprend le bleu clair deja utilise par les liens sur fond sombre. */
         .feature-section.tone-dark p.method-in-science {
-            background: rgba(255, 255, 255, 0.05);
-            border-left-color: #8fc7d8;
             color: #b9b9cc;
         }
 
@@ -718,12 +720,10 @@
            successives d'avant. */
         .mis-ref {
             display: block;
-            margin: 0.3rem 0 0.7rem 0;
-            padding-left: 0.9rem;
-            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            margin: 0.25rem 0 0.8rem 0;
             font-size: var(--t-sm);
             line-height: 1.5;
-            opacity: 0.82;
+            opacity: 0.72;
         }
 
         .mis-ref:last-child { margin-bottom: 0; }
