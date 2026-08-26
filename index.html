@@ -477,7 +477,10 @@
                distingue deja par son fond et sa serif, il n'a pas besoin d'un
                marqueur de plus. */
             border: 1px solid var(--line);
-            padding: 1.5rem 1rem;
+            /* Plus de rembourrage lateral : l'equation est centree dans un
+               panneau large, et 1rem la laissait flotter contre les bords des
+               que la fenetre se resserrait. */
+            padding: 1.75rem 1.5rem;
             margin: 1.25rem 0;
             font-family: 'Times New Roman', Georgia, serif;
             color: var(--ink);
@@ -522,6 +525,23 @@
             white-space: nowrap;
         }
         .eq-badge-conv { background: #aab; }
+
+        /* LE POIDS DES TERMES SUIT CELUI DES PASTILLES.
+           Les pastilles disaient deja lequel des deux blocs est l'apport : l'une
+           n'est qu'un contour, l'autre est pleine. Mais les termes au-dessus
+           avaient tous la meme intensite, donc l'oeil ne savait pas ou regarder
+           dans l'equation elle-meme. La partie conventionnelle recule d'un cran ;
+           le terme d'enrichissement reste a pleine intensite. Rien n'est ajoute,
+           c'est le contraste qui fait le travail. */
+        .eq-group--conv .eq-expr {
+            color: #6b6b85;
+            border-bottom-color: #c6c6d4;
+        }
+
+        .eq-group--conv .eq-label { color: #9a9ab0; }
+
+        /* Le « + » qui relie les deux groupes appartient a la lecture de
+           l'equation, pas a l'un des deux blocs : il garde son intensite. */
         .eq-badge-hdic { background: #1a1a2e; }
 
         .version {
@@ -883,6 +903,17 @@
 
         .feature-section.tone-dark .eq-expr { border-bottom-color: rgba(255, 255, 255, 0.3); }
         .feature-section.tone-dark .eq-label { color: #9a9ab4; }
+
+        .feature-section.tone-dark .eq-group--conv .eq-expr {
+            color: #8f8fae;
+            border-bottom-color: rgba(255, 255, 255, 0.16);
+        }
+
+        /* #8a8aa4 et pas plus sombre : a 0.7rem le libelle est du petit texte,
+           donc il lui faut 4.5:1 sur le fond du panneau. #75758f, essaye
+           d'abord, tombait a 3.5:1. Le terme au-dessus fait 18px, donc 3:1
+           lui suffit et il peut reculer davantage. */
+        .feature-section.tone-dark .eq-group--conv .eq-label { color: #8a8aa4; }
 
         /* Les deux pastilles doivent rester DISTINCTES l'une de l'autre, et
            c'est leur contraste qui porte le sens : l'une est la methode
@@ -1430,7 +1461,7 @@
                 <div class="equation-block">
                     <div class="eq-row" style="display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 0.75rem 0.5rem; font-size: 1.15rem; letter-spacing: 0.5px;">
                         <span><b>&phi;</b>(<b>x</b>) =</span>
-                        <span class="eq-group">
+                        <span class="eq-group eq-group--conv">
                             <span class="eq-terms">
                                 <span class="eq-term">
                                     <span class="eq-expr"><b>x</b> + <b>u</b></span>
@@ -1445,7 +1476,7 @@
                             <span class="eq-badge eq-badge-conv">Conventional DIC</span>
                         </span>
                         <span>+</span>
-                        <span class="eq-group">
+                        <span class="eq-group eq-group--hdic">
                             <span class="eq-terms">
                                 <span class="eq-term">
                                     <span class="eq-expr"><b>u'</b> &middot; <i>H</i>(<b>x</b> &minus; <b>x</b><sub>0</sub>)</span>
