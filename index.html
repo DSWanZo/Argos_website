@@ -666,34 +666,21 @@
             color: #666;
         }
 
-        /* Note de source : une reference bibliographique n'a pas le poids
-           d'un paragraphe d'argumentaire, elle se donne a lire APRES lui. */
-        .feature-section p.source-note {
-            /* Elle annote le bloc au-dessus, donc elle prend SA largeur. Sans
-               cela elle heritait du plafond de prose de `.feature-section p`
-               (68ch) -- et `ch` se mesure sur la police de l element : a
-               15px ses 68ch font moins de pixels qu a 17px, donc elle revenait
-               a la ligne avant le paragraphe, qui revenait avant le bloc. */
-            max-width: none;
-            font-size: var(--t-md);
-            line-height: 1.55;
-            color: var(--muted);
-            margin-top: 1rem;
-        }
-
-        .feature-section.tone-dark p.source-note { color: #8a8aa2; }
-
         /* ========== LA METHODE, DANS SCIENCE ==========
            Ce bloc met en avant l'APPLICATION publiee de la methode, et le sujet
            grammatical de sa phrase d'accroche est « the method », jamais Argos2D.
            C'est toute la difference entre un fait verifiable et une
            appropriation : l'article de Science n'a pas ete produit avec ce
            logiciel, il emploie la methode que ce logiciel implemente.
-           Il suit la note « Based on: … » plutot que de la remplacer : l'ordre
-           equation, article de METHODE, puis application, se lit tout seul. */
+           Il porte les DEUX references, article de methode puis application, la
+           ou il y avait deux notes successives : une reference chasse l'autre, et
+           l'argument se noyait dans vingt noms d'auteurs. */
         .feature-section p.method-in-science {
-            /* Meme raison que .source-note juste au-dessus : elle annote le bloc,
-               donc elle prend SA largeur et non le plafond de prose de 68ch. */
+            /* Etant un <p> de .feature-section, il heriterait du plafond de prose
+               de 68ch, qui ne concerne que le texte courant. Un encadre annote le
+               bloc au-dessus, donc il prend SA largeur. Piege recurrent sur cette
+               page : `ch` se mesure sur la police de L'ELEMENT, donc la meme
+               valeur donne des largeurs differentes selon la taille du texte. */
             max-width: none;
             margin-top: 1.25rem;
             padding: 0.95rem 1.15rem;
@@ -724,6 +711,22 @@
         }
 
         .feature-section.tone-dark .mis-lead { color: #f2f2f7; }
+
+        /* Les references sont mises A PART, en plus petit et decalees : sans
+           cela, elles se lisent dans la meme foulee que la phrase et l'argument
+           se noie dans les noms d'auteurs. C'est ce que faisaient les deux notes
+           successives d'avant. */
+        .mis-ref {
+            display: block;
+            margin: 0.3rem 0 0.7rem 0;
+            padding-left: 0.9rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: var(--t-sm);
+            line-height: 1.5;
+            opacity: 0.82;
+        }
+
+        .mis-ref:last-child { margin-bottom: 0; }
 
         /* ========== LEGENDES DE FIGURE ==========
            Une legende n'est PAS de la prose : les bornes de largeur de
@@ -1445,21 +1448,20 @@
                         </span>
                     </div>
                 </div>
-                <p class="source-note">
-                    Based on: F. Bourdin, J.C. Stinville, M.P. Echlin, P.G. Callahan, W.C. Lenthe, C.J. Torbet,
-                    D. Texier, F. Bridier, J. Cormier, P. Villechaise, T.M. Pollock, V. Valle,
-                    <em>Measurements of plastic localization by heaviside-digital image correlation</em>,
-                    Acta Materialia, Vol.&nbsp;157, pp.&nbsp;307&ndash;325, 2018.
-                    <a href="https://doi.org/10.1016/j.actamat.2018.07.013" target="_blank" rel="noopener">DOI</a>
-                </p>
                 <p class="method-in-science">
                     <span class="mis-lead">The method, in <em>Science</em>.</span>
-                    The same Heaviside-DIC resolves the slip-band offsets measured in
-                    J.C.&nbsp;Stinville, M.A.&nbsp;Charpagne, A.&nbsp;Cervellon, S.&nbsp;Hemery,
-                    F.&nbsp;Wang, P.G.&nbsp;Callahan, V.&nbsp;Valle, T.M.&nbsp;Pollock,
-                    <em>On the origins of fatigue strength in crystalline metallic materials</em>,
-                    Science, Vol.&nbsp;377, No.&nbsp;6610, pp.&nbsp;1065&ndash;1071, 2022.
-                    <a href="https://doi.org/10.1126/science.abn0392" target="_blank" rel="noopener">DOI</a>
+                    Heaviside-DIC was developed by <strong>V.&nbsp;Valle</strong> and co-workers at
+                    Institut&nbsp;PPRIME, Universit&eacute; de Poitiers.
+                    <span class="mis-ref">F.&nbsp;Bourdin <em>et&nbsp;al.</em>, <em>Measurements of plastic
+                    localization by heaviside-digital image correlation</em>, Acta&nbsp;Materialia
+                    <b>157</b> (2018) 307&ndash;325.
+                    <a href="https://doi.org/10.1016/j.actamat.2018.07.013" target="_blank" rel="noopener">DOI</a></span>
+                    It is the method behind the slip-band offsets measured for the fatigue-strength
+                    study published in <em>Science</em>.
+                    <span class="mis-ref">J.C.&nbsp;Stinville <em>et&nbsp;al.</em>, <em>On the origins of
+                    fatigue strength in crystalline metallic materials</em>, Science
+                    <b>377</b> (2022) 1065&ndash;1071.
+                    <a href="https://doi.org/10.1126/science.abn0392" target="_blank" rel="noopener">DOI</a></span>
                 </p>
             </div>
 
