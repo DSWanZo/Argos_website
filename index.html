@@ -56,19 +56,6 @@
             --warn-tint:  #fffbeb;
             --link:       #1d5fbf;
 
-            /* MESURE DE LECTURE, en rem et surtout PAS en ch. L'unite ch vaut la
-               largeur du « 0 » DANS LA POLICE DE L'ELEMENT : la meme valeur en ch
-               donne donc des largeurs differentes selon la taille du texte, et
-               deux blocs voisins cessent de s'aligner sans qu'on voie pourquoi.
-               Ce piege s'est manifeste trois fois sur cette page -- sur les notes
-               de source, sur les sous-titres de section, puis entre la prose et
-               les references. Un rem est absolu : tout ce qui est du TEXTE prend
-               cette mesure, quelle que soit sa taille. Les figures, elles,
-               debordent volontiers : c'est ce qui distingue une figure d'un
-               paragraphe. 36rem font environ 72 caracteres a la taille du corps,
-               le haut de la plage confortable. */
-            --measure:    36rem;
-
             /* échelle typographique */
             --t-xs:   0.75rem;
             --t-sm:   0.8125rem;
@@ -312,10 +299,14 @@
             max-width: none;
         }
 
+        /* AUCUN plafond de largeur sur le texte des sections : il prend toute la
+           colonne, comme les blocs qu'il accompagne. C'est un choix de maquette,
+           et il vaut pour TOUT ce qui est du texte ici -- paragraphes, listes,
+           references. Un seul bord droit, donc.
+           `main` borne deja la colonne a 900px, donc rien ne part au large. */
         .feature-section p {
             margin-bottom: 0.75rem;
             color: var(--body);
-            max-width: var(--measure);
         }
 
         .feature-section ul {
@@ -326,9 +317,6 @@
         .feature-section li {
             margin-bottom: 0.35rem;
             color: var(--body);
-            /* Meme mesure que les paragraphes voisins : a 66ch elles s'arretaient
-               une quinzaine de pixels avant eux, dans la meme section. */
-            max-width: var(--measure);
         }
 
         /* ========== SCREENSHOT PLACEHOLDER ========== */
@@ -694,12 +682,8 @@
            ou il y avait deux notes successives : une reference chasse l'autre, et
            l'argument se noyait dans vingt noms d'auteurs. */
         .feature-section p.method-in-science {
-            /* MEME MESURE que la prose au-dessus. Elle courait auparavant
-               jusqu'au bord, ce qui donnait deux largeurs de texte dans une meme
-               section : les references allaient au bout, les paragraphes non.
-               C'est du texte, donc c'est la mesure de lecture qui s'applique --
-               seule l'equation, qui est une figure, deborde. */
-            max-width: var(--measure);
+            /* Comme le reste du texte de la section : toute la colonne. */
+            max-width: none;
             /* NI fond, NI cadre, NI filet. La page en a deja assez : l'equation
                juste au-dessus est un panneau, et empiler un second contenant sous
                lui faisait lire deux contenus de meme rang alors que celui-ci
