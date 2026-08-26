@@ -56,6 +56,19 @@
             --warn-tint:  #fffbeb;
             --link:       #1d5fbf;
 
+            /* MESURE DE LECTURE, en rem et surtout PAS en ch. L'unite ch vaut la
+               largeur du « 0 » DANS LA POLICE DE L'ELEMENT : la meme valeur en ch
+               donne donc des largeurs differentes selon la taille du texte, et
+               deux blocs voisins cessent de s'aligner sans qu'on voie pourquoi.
+               Ce piege s'est manifeste trois fois sur cette page -- sur les notes
+               de source, sur les sous-titres de section, puis entre la prose et
+               les references. Un rem est absolu : tout ce qui est du TEXTE prend
+               cette mesure, quelle que soit sa taille. Les figures, elles,
+               debordent volontiers : c'est ce qui distingue une figure d'un
+               paragraphe. 36rem font environ 72 caracteres a la taille du corps,
+               le haut de la plage confortable. */
+            --measure:    36rem;
+
             /* échelle typographique */
             --t-xs:   0.75rem;
             --t-sm:   0.8125rem;
@@ -302,7 +315,7 @@
         .feature-section p {
             margin-bottom: 0.75rem;
             color: var(--body);
-            max-width: 68ch;
+            max-width: var(--measure);
         }
 
         .feature-section ul {
@@ -313,7 +326,9 @@
         .feature-section li {
             margin-bottom: 0.35rem;
             color: var(--body);
-            max-width: 66ch;
+            /* Meme mesure que les paragraphes voisins : a 66ch elles s'arretaient
+               une quinzaine de pixels avant eux, dans la meme section. */
+            max-width: var(--measure);
         }
 
         /* ========== SCREENSHOT PLACEHOLDER ========== */
@@ -459,7 +474,10 @@
         .equation-block {
             background: linear-gradient(135deg, #f8f8fb 0%, #f0f0f8 100%);
             border-radius: 8px;
-            border-left: 3px solid var(--ink);
+            /* Contour uniforme, sans filet d'accent a gauche : le panneau se
+               distingue deja par son fond et sa serif, il n'a pas besoin d'un
+               marqueur de plus. */
+            border: 1px solid var(--line);
             padding: 1.5rem 1rem;
             margin: 1.25rem 0;
             font-family: 'Times New Roman', Georgia, serif;
@@ -676,12 +694,12 @@
            ou il y avait deux notes successives : une reference chasse l'autre, et
            l'argument se noyait dans vingt noms d'auteurs. */
         .feature-section p.method-in-science {
-            /* Etant un <p> de .feature-section, il heriterait du plafond de prose
-               de 68ch, qui ne concerne que le texte courant. Un encadre annote le
-               bloc au-dessus, donc il prend SA largeur. Piege recurrent sur cette
-               page : `ch` se mesure sur la police de L'ELEMENT, donc la meme
-               valeur donne des largeurs differentes selon la taille du texte. */
-            max-width: none;
+            /* MEME MESURE que la prose au-dessus. Elle courait auparavant
+               jusqu'au bord, ce qui donnait deux largeurs de texte dans une meme
+               section : les references allaient au bout, les paragraphes non.
+               C'est du texte, donc c'est la mesure de lecture qui s'applique --
+               seule l'equation, qui est une figure, deborde. */
+            max-width: var(--measure);
             /* NI fond, NI cadre, NI filet. La page en a deja assez : l'equation
                juste au-dessus est un panneau, et empiler un second contenant sous
                lui faisait lire deux contenus de meme rang alors que celui-ci
@@ -864,10 +882,7 @@
            qui devient la chose claire. */
         .feature-section.tone-dark .equation-block {
             background: rgba(255, 255, 255, 0.05);
-            border-left-color: #8fc7d8;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.08);
             color: #f2f2f7;
         }
 
