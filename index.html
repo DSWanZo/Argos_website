@@ -1411,7 +1411,7 @@
         <h1>Argos</h1>
         <p>Digital Image Correlation Software</p>
         <nav class="tabs">
-            <button class="tab-button active" data-tab="argos2d">Argos2D <span class="version">v1.1.2</span></button>
+            <button class="tab-button active" data-tab="argos2d">Argos2D <span class="version">v1.2</span></button>
             <button class="tab-button" data-tab="argos3d">Argos3D</button>
         </nav>
     </header>
@@ -1478,7 +1478,7 @@
                      ===================================================== -->
                 <div class="hero-download">
                     <a class="btn btn-primary js-download"
-                       href="https://argos2d-free.s3.eu-west-3.amazonaws.com/Argos2D_Free_v1.1.2_portable.zip"
+                       href="https://argos2d-free.s3.eu-west-3.amazonaws.com/Argos2D_Free_v1.2_portable.zip"
                        data-edition="free"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v9m0 0L4.5 6.5M8 10l3.5-3.5M2 12.5v1A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Download free portable version</a>
                     <a class="btn btn-secondary" href="#editions">Compare editions</a>
                     <p class="download-meta">
@@ -1673,7 +1673,7 @@
                             correlation parameter.
                         </p>
                         <a class="btn btn-primary js-download"
-                           href="https://argos2d-free.s3.eu-west-3.amazonaws.com/Argos2D_Free_v1.1.2_portable.zip"
+                           href="https://argos2d-free.s3.eu-west-3.amazonaws.com/Argos2D_Free_v1.2_portable.zip"
                            data-edition="free"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v9m0 0L4.5 6.5M8 10l3.5-3.5M2 12.5v1A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Download free portable version</a>
                     </div>
 
@@ -1815,7 +1815,7 @@
                 It helps a small independent tool reach the next laboratory.
             </p>
             <div class="cite-box">
-                <span class="cite-text" id="cite-plain">Wantz, S. (2026). Argos2D (Version 1.1.2) [Computer software]. Sam'Strain. <a href="https://doi.org/10.5281/zenodo.22099000" target="_blank" rel="noopener">https://doi.org/10.5281/zenodo.22099000</a></span>
+                <span class="cite-text" id="cite-plain">Wantz, S. (2026). Argos2D (Version 1.2) [Computer software]. Sam'Strain. <a href="https://doi.org/10.5281/zenodo.22099000" target="_blank" rel="noopener">https://doi.org/10.5281/zenodo.22099000</a></span>
                 <button type="button" class="cite-copy" data-cite-copy="cite-plain">Copy</button>
             </div>
             <details class="cite-more">
@@ -1823,7 +1823,7 @@
 <pre id="cite-bibtex">@software{wantz_argos2d,
   author    = {Wantz, Samuel},
   title     = {{Argos2D}},
-  version   = {1.1.2},
+  version   = {1.2},
   year      = {2026},
   publisher = {Sam'Strain},
   doi       = {10.5281/zenodo.22099000},
@@ -1879,7 +1879,7 @@
             method="POST" target="dl-sink">
         <h2 id="dl-title">Download the free portable version</h2>
         <p class="dl-lead">
-          Argos2D 1.1.2, Windows 10/11, 64-bit. Portable version.
+          Argos2D 1.2, Windows 10/11, 64-bit. Portable version.
         </p>
 
         <label for="dl-email">Your email</label>
@@ -1906,7 +1906,7 @@
           <span><strong>Windows may warn you the first time you run Argos2D.</strong>
           Argos2D is a specialist tool with a small user base, so it has not yet built
           a download reputation.
-          <span class="dl-hash">SHA-256: c3cbcc274cde9b890b70e326c79cfe86c77be199080916aa6b4fd71e36f80ab3</span>
+          <span class="dl-hash">SHA-256: f1e90d23f38df4b72ab87a86177f55d3b7eb6239c880ce65f4e1f60308b0d788</span>
           </span>
         </p>
       </form>
@@ -1920,14 +1920,15 @@
         // Elle etait lue dans updates/latest.json. Le commentaire d'alors
         // anticipait deja le risque, dans un sens : « si l'installeur gratuit
         // prend du retard sur elle, la pastille dira la complete ». C'est
-        // l'INVERSE qui s'est produit. La page sert desormais l'edition gratuite
-        // portable, passee en 1.1.2, tandis que latest.json reste en 1.1.1 : ce
-        // fichier notifie les CLIENTS INSTALLES, et on ne voulait pas les
-        // avertir d'une version qui ne leur apporte rien.
+        // l'INVERSE qui s'est produit en 1.1.2, ou la page servait la gratuite
+        // portable pendant que latest.json restait en 1.1.1.
         //
-        // Les deux editions divergent donc pour de bon, et aucun lien
-        // automatique entre la pastille et latest.json ne peut plus etre juste :
-        // il afficherait v1.1.1 au-dessus d'un bouton qui sert la 1.1.2.
+        // En 1.2 les deux editions sont RE-ALIGNEES, meme numero des deux cotes.
+        // Ce n'est pas une raison pour recabler la pastille sur latest.json :
+        // elles peuvent redivergir a la prochaine publication, et c'est meme le
+        // cas normal puisque les deux editions ne sortent pas ensemble. Le lien
+        // automatique serait juste aujourd'hui et faux demain, sans que rien ne
+        // le signale.
         //
         // La pastille dit ce que CETTE PAGE sert. Elle est a bumper avec le
         // lien, l'empreinte et la citation, et l'etape 1 du guide de
