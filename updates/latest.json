@@ -1,4 +1,4 @@
 {
-  "version": "1.2",
-  "releaseNotes": "- Various bug fixes and internal improvements.\n- Much smaller download and install footprint."
+  "version": "1.3",
+  "releaseNotes": "New: neural correlation (xR-DIC) for licenses that include it, with crack detection in the Fracture tab. Hierarchical pixel search, now always on. Fixed: a double click on Compute displacements could start two computations. The license agreement has been updated and will be shown again."
 }
