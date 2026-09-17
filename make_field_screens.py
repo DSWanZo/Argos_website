@@ -51,10 +51,11 @@ DISP_PCT = (1, 99)
 # ZONE RETENUE POUR LE CURSEUR DU HAUT : on jette le haut et la droite, calmes, pour garder
 # la partie dense en bandes et la fissure la plus ouverte. Fractions de l'image, choisies
 # sur le cadre trace a l'ecran.
-CROP_TOP = 0.28
-# Le reste de la largeur est ajuste pour rendre l'image CARREE : a 0.30 elle etait plus
-# large que haute (689 x 647), et couper davantage le haut l'aurait aplatie encore.
-CROP_RIGHT = 0.3425
+# Format 4:3 : la largeur suit le cadre trace a l'ecran, la hauteur en decoule. Carree
+# (647 x 647), l'image occupait 740 px de haut sur la page et poussait tout le reste vers
+# le bas ; c'est la hauteur qui coute, pas la largeur.
+CROP_RIGHT = 0.30
+CROP_TOP = 0.4243
 
 
 
