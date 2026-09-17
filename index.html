@@ -85,7 +85,19 @@
             -webkit-font-smoothing: antialiased;
             /* la bande sombre pleine largeur déborde de `main` avec des marges
                négatives en 100vw : sans ceci, la barre de défilement crée un
-               débordement horizontal de quelques pixels. */
+               débordement horizontal de quelques pixels.
+
+               `hidden` ne suffit PAS sur mobile : posé sur body, il remonte au
+               viewport, et Chrome Android comme Safari iOS laissent alors le
+               doigt faire glisser la page de côté, avec un vide à droite.
+               `clip` coupe vraiment, sans créer de zone défilable. Il faut que
+               html ait son propre overflow, sinon celui de body remonte au
+               viewport, où `clip` est traité comme `hidden`. */
+            overflow-x: hidden;
+            overflow-x: clip;
+        }
+
+        html {
             overflow-x: hidden;
         }
 
@@ -1131,6 +1143,10 @@
         .compare-wrap {
             margin-top: 1.75rem;
             overflow-x: auto;
+            /* Les .sr-only du tableau sont en position absolue : sans ancetre
+               positionne, ils se placent par rapport a la page, echappent au
+               defilement du tableau et elargissent la page sur mobile. */
+            position: relative;
         }
 
         table.compare {
