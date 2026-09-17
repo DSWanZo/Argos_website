@@ -54,6 +54,11 @@ DISP_PCT = (1, 99)
 # pixels que personne ne voit. La section neuronale, elle, garde ses cartes entieres.
 CROP_TOP = 1 / 3
 
+# ET LE QUART DROIT. Meme raison : cette partie de la ROI est calme, les bandes et la
+# fissure sont a gauche. L'image finale est donc un paysage large, qui tient sur la page
+# sans l'etirer en hauteur.
+CROP_RIGHT = 1 / 4
+
 
 def load(folder, comp):
     return tifffile.imread(SRC / folder / "Displacements" / f"{STEM}_{comp}.tif").astype(np.float64)
@@ -79,7 +84,8 @@ def dic_to_pixels(grid, shape):
 
 
 def save(data, norm, cmap_name, name):
-    data = data[int(round(data.shape[0] * CROP_TOP)):]
+    data = data[int(round(data.shape[0] * CROP_TOP)):,
+                :int(round(data.shape[1] * (1 - CROP_RIGHT)))]
     cmap = colormaps[cmap_name].with_extremes(bad=(1, 1, 1, 1))
     rgb = (cmap(norm(data))[..., :3] * 255).astype(np.uint8)
     out = DEST / name
