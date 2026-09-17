@@ -206,7 +206,7 @@
         }
 
         main {
-            max-width: 900px;
+            max-width: 1280px;
             margin: 0 auto;
             padding: 2.5rem 1.5rem;
         }
@@ -830,7 +830,7 @@
 
         .feature-split .split-media { margin: 0; }
         .feature-split .split-media > a { display: block; }
-        .feature-split .split-media img {
+        .feature-split .split-media > a img {
             display: block;
             width: 100%;
             border-radius: 6px;
@@ -953,7 +953,7 @@
             box-shadow: none;
             margin-left: calc(50% - 50vw);
             margin-right: calc(50% - 50vw);
-            padding: 3rem max(3.5rem, calc(50vw - 450px + 3.5rem));
+            padding: 3rem max(3.5rem, calc(50vw - 640px + 3.5rem));
         }
 
         .feature-section.tone-dark h2 { color: #fff; }
@@ -1655,14 +1655,36 @@
                  sections qui expliquent le fonctionnement -- le modele ici,
                  son implementation la-bas. Les quatre autres montrent des
                  resultats et restent claires. -->
-            <div class="feature-section tone-dark" id="heaviside">
+            <div class="feature-section feature-split tone-dark" id="heaviside">
+                <div class="split-text">
                 <h2>Method 2 &middot; Heaviside-Enriched DIC</h2>
                 <p>
                     Standard DIC assumes continuous displacement inside each subset, which smears out
                     discontinuities across several pixels. Argos adds a Heaviside step function to the
                     correlation model, allowing a sharp jump to be identified <em>within</em> each subset.
                 </p>
-                <p>The subset shape function is augmented with a jump vector and a Heaviside function:</p>
+                <p>The subset shape function is augmented with a jump vector and a Heaviside function.</p>
+                <p class="method-in-science">
+                    <span class="mis-lead">Used in <em>Science</em></span>
+                    Developed by V.&nbsp;Valle and co-workers at Institut&nbsp;PPRIME,
+                    Universit&eacute; de Poitiers.
+                    <span class="mis-ref">
+                        <span class="mis-tag">Method</span>
+                        <span>F.&nbsp;Bourdin <em>et&nbsp;al.</em>, <em>Measurements of plastic
+                        localization by heaviside-digital image correlation</em>, Acta&nbsp;Materialia
+                        <b>157</b> (2018) 307&ndash;325.
+                        <a href="https://doi.org/10.1016/j.actamat.2018.07.013" target="_blank" rel="noopener">DOI</a></span>
+                    </span>
+                    <span class="mis-ref">
+                        <span class="mis-tag">Used in</span>
+                        <span>J.C.&nbsp;Stinville <em>et&nbsp;al.</em>, <em>On the origins of
+                        fatigue strength in crystalline metallic materials</em>, <b>Science</b>
+                        <b>377</b> (2022) 1065&ndash;1071.
+                        <a href="https://doi.org/10.1126/science.abn0392" target="_blank" rel="noopener">DOI</a></span>
+                    </span>
+                </p>
+                </div>
+                <div class="split-media">
                 <div class="equation-block">
                     <div class="eq-row">
                         <span><b>&phi;</b>(<b>x</b>) =</span>
@@ -1692,25 +1714,7 @@
                         </span>
                     </div>
                 </div>
-                <p class="method-in-science">
-                    <span class="mis-lead">Used in <em>Science</em></span>
-                    Developed by V.&nbsp;Valle and co-workers at Institut&nbsp;PPRIME,
-                    Universit&eacute; de Poitiers.
-                    <span class="mis-ref">
-                        <span class="mis-tag">Method</span>
-                        <span>F.&nbsp;Bourdin <em>et&nbsp;al.</em>, <em>Measurements of plastic
-                        localization by heaviside-digital image correlation</em>, Acta&nbsp;Materialia
-                        <b>157</b> (2018) 307&ndash;325.
-                        <a href="https://doi.org/10.1016/j.actamat.2018.07.013" target="_blank" rel="noopener">DOI</a></span>
-                    </span>
-                    <span class="mis-ref">
-                        <span class="mis-tag">Used in</span>
-                        <span>J.C.&nbsp;Stinville <em>et&nbsp;al.</em>, <em>On the origins of
-                        fatigue strength in crystalline metallic materials</em>, <b>Science</b>
-                        <b>377</b> (2022) 1065&ndash;1071.
-                        <a href="https://doi.org/10.1126/science.abn0392" target="_blank" rel="noopener">DOI</a></span>
-                    </span>
-                </p>
+                </div>
             </div>
 
             <!-- ==================== NEURAL CORRELATION ====================
@@ -1719,7 +1723,8 @@
                  une seule grandeur, l'effective strain de Stinville, calculee
                  identiquement pour les deux methodes
                  (OmniCorr2D/scripts/doc_figures/make_hdic_xrdic_slider.py). -->
-            <div class="feature-section" id="neural-correlation">
+            <div class="feature-section feature-split is-reversed" id="neural-correlation">
+                <div class="split-text">
                 <h2>Method 3 &middot; Neural Correlation (xR-DIC)</h2>
                 <p>
                     xR-DIC is derived from the RAFT optical flow architecture, heavily modified for
@@ -1731,8 +1736,9 @@
                     <li><strong>Fracture tab</strong>: cracks detected and measured directly on the neural field</li>
                     <li><strong>Licensed option</strong>: the model and its engine are downloaded once, on first use</li>
                 </ul>
-
-                <div style="margin: 1.25rem auto 0 auto; max-width: 640px;">
+                </div>
+                <div class="split-media">
+                <div>
                     <div class="comparison-slider" style="position: relative; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.12); user-select: none; -webkit-user-select: none;">
                         <img class="cm-after" src="screens/strain_Argos2D.png" alt="Effective strain computed with neural correlation (xR-DIC)" loading="lazy" style="display: block; width: 100%; height: auto;">
                         <div class="comparison-before" style="position: absolute; top: 0; left: 0; width: 50%; height: 100%; overflow: hidden;">
@@ -1755,13 +1761,22 @@
                         <a href="https://doi.org/10.1038/s41597-022-01525-w" target="_blank" rel="noopener"><em>Scientific Data</em> 9 (2022) 460</a>.
                     </p>
                 </div>
+                </div>
             </div>
 
             <!-- ==================== INTERACTIVE VISUALIZATION ==================== -->
-            <div class="feature-section">
+            <div class="feature-section feature-split" id="interactive">
+                <div class="split-text">
                 <h2>Interactive Visualization</h2>
                 <p class="section-subtitle">A full GUI to set up correlations and explore the results.</p>
-                <div style="margin-top: 1.25rem;">
+                <p>
+                    Load your images, draw the region of interest, run the correlation, then browse
+                    displacement, strain and fracture maps in the same window, with synchronized views,
+                    line profiles and per-field contrast.
+                </p>
+                </div>
+                <div class="split-media">
+                <div>
                     <img src="screens/GUI.png" alt="Argos2D interface — displacement field with Heaviside enrichment" style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
                     <p class="fig-caption">
                         Dataset from A. Rouwane, D. Texier, J.-N. Périé, J.-E. Dufour, J.C. Stinville et al.,
@@ -1769,10 +1784,11 @@
                         Courtesy of Damien Texier.
                     </p>
                 </div>
+                </div>
             </div>
 
             <!-- ==================== 2. FRACTURE ANALYSIS ==================== -->
-            <div class="feature-section feature-split">
+            <div class="feature-section feature-split is-reversed">
                 <div class="split-text">
                     <h2>Fracture &amp; Discontinuity Analysis</h2>
                     <p class="section-subtitle">Dedicated post-processing for cracks, twins and slip bands.</p>
@@ -1796,7 +1812,7 @@
             </div>
 
             <!-- ==================== 3. STRAIN POST-PROCESSING ==================== -->
-            <div class="feature-section feature-split is-reversed">
+            <div class="feature-section feature-split">
                 <div class="split-text">
                     <h2>Strain Post-Processing</h2>
                     <p class="section-subtitle">Customizable derivative kernels and built-in criteria.</p>
@@ -1823,7 +1839,7 @@
             </div>
 
             <!-- ==================== 5. MOSAIC & BATCH ==================== -->
-            <div class="feature-section feature-split">
+            <div class="feature-section feature-split is-reversed">
                 <div class="split-text">
                     <h2>Mosaic Stitching &amp; Batch Mode</h2>
                     <p class="section-subtitle">Large-area analysis from tiled acquisitions.</p>
@@ -1852,9 +1868,16 @@
                  Seule bande sombre de la page, et pleine largeur : elle casse
                  la suite des cartes blanches au moment ou le lecteur a fini
                  l'argumentaire, juste avant qu'on lui demande quelque chose. -->
-            <div class="feature-section tone-dark" id="under-the-hood">
+            <div class="feature-section feature-split tone-dark" id="under-the-hood">
+                <div class="split-text">
                 <h2>Under the Hood</h2>
                 <p class="section-subtitle">Core engine specifications</p>
+                <p>
+                    Everything runs on your NVIDIA GPU, from pixel search to sub-pixel optimization and
+                    neural inference. Your images never leave your computer.
+                </p>
+                </div>
+                <div class="split-media">
                 <div class="tech-grid">
                     <div class="tech-item">
                         <strong>GPU Correlation</strong>
@@ -1880,6 +1903,7 @@
                         <strong>AI Inference</strong>
                         <span>ONNX Runtime on CUDA, fully local and offline, encrypted model</span>
                     </div>
+                </div>
                 </div>
             </div>
 
