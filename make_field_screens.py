@@ -48,6 +48,12 @@ STRAIN_KERNEL = 3
 STRAIN_VMAX_PCT = 10.0
 DISP_PCT = (1, 99)
 
+# ZONE RETENUE POUR LE CURSEUR DU HAUT : on jette le haut et la droite, calmes, pour garder
+# la partie dense en bandes et la fissure la plus ouverte. Fractions de l'image, choisies
+# sur le cadre trace a l'ecran.
+CROP_TOP = 0.28
+CROP_RIGHT = 0.30
+
 
 
 def load(folder, comp):
@@ -74,6 +80,8 @@ def dic_to_pixels(grid, shape):
 
 
 def save(data, norm, cmap_name, name):
+    data = data[int(round(data.shape[0] * CROP_TOP)):,
+                :int(round(data.shape[1] * (1 - CROP_RIGHT)))]
     cmap = colormaps[cmap_name].with_extremes(bad=(1, 1, 1, 1))
     rgb = (cmap(norm(data))[..., :3] * 255).astype(np.uint8)
     out = DEST / name
