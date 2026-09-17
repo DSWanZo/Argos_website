@@ -1,15 +1,29 @@
 #!/usr/bin/env python3
 """
-Generate colormapped PNGs of DIC / H-DIC fields for the Argos website.
+Generate the colormapped PNGs of the hero comparison slider: standard DIC (left)
+against Argos2D (right), where the Argos2D side is the neural correlation result
+(xR-DIC).
 
-Reads the float32 TIFF field exports from the Img_Stinville dataset, applies a
-colormap (jet for displacement, viridis for strain) with a *shared* color scale
-within each before/after pair, and writes the PNGs into the website's screens/
-directory, overwriting the current comparison-slider images.
+Source: the Argos2D exports of Data_Stinville (Stinville et al., Scientific Data
+9, 2022, 460), sub-folders DIC and XR_DIC, pair step1_E1_Ti6_P4_4.
 
-Field choices (as requested):
-    - displacement -> uy
-    - strain       -> von Mises (evm)
+Fields:
+    - displacement -> uy, jet, shared p1-p99 scale
+    - strain       -> EFFECTIVE STRAIN (Stinville), viridis, 0-10 %
+
+    eps_eff = sqrt( (0.5 (du/dx - dv/dy))^2 + (0.5 (du/dy + dv/dx))^2 )
+
+The strain is computed HERE from the exported displacements, identically for
+both sides, with the same least-squares derivative (half-width 3) and the same
+0-10 % scale as the neural-correlation section of the page
+(OmniCorr2D/scripts/doc_figures/make_hdic_xrdic_slider.py). Both sliders are
+therefore directly comparable.
+
+GRIDS. The DIC run uses a 5 px spacing, the neural run a 1 px one. Derivatives
+are taken on each field's own grid (divided by its spacing), then the DIC maps
+are resampled bilinearly onto the neural pixel grid. For the same ROI, the first
+DIC point sits 60 px inside the ROI (half-window 30 + search 30) and the first
+neural pixel 62 px (seed window 65), hence the 2 px offset below.
 
 Usage:
     python make_field_screens.py
@@ -21,103 +35,72 @@ import tifffile
 from matplotlib import colormaps
 from matplotlib.colors import Normalize
 from PIL import Image
+from scipy.ndimage import correlate1d, map_coordinates
 
-# ----------------------------------------------------------------------------
-# Configuration
-# ----------------------------------------------------------------------------
-SRC = Path(r"C:\Users\Samue\Documents\OmniCorr\dev_DLDIC\images\Img_Stinville")
-DEST = Path(r"C:\Users\Samue\Documents\OmniCorr\Argos_website\screens")
-STEM = "step1_E1_Ti6_P4_4"          # common file prefix in the dataset
-SCALE = 1                           # integer upscale factor (1 = native resolution)
+SRC = Path(r"C:\Users\Samue\Documents\OmniCorr\Data_Stinville")
+DEST = Path(__file__).resolve().parent / "screens"
+STEM = "step1_E1_Ti6_P4_4"
 
-# Each entry produces a DIC / H-DIC pair that shares one color scale so the two
-# sides of the slider are directly comparable.
-#   component  : TIFF suffix to read (file is "<STEM>_<component>.tif")
-#   cmap       : matplotlib colormap name
-#   pct        : (low, high) percentiles used for the color limits
-#   vmax_scale : multiplier on the upper limit; >1 widens the range
-#                (i.e. lowers the contrast). Optional, defaults to 1.0.
-#   dirs       : (standard-DIC folder, Heaviside-DIC folder)
-#   out        : (standard-DIC png name, Heaviside-DIC png name)
-FIELDS = [
-    dict(
-        name="displacement uy",
-        component="uy",
-        cmap="jet",
-        pct=(1, 99),
-        dirs=("Displacements", "Displacements_HDIC"),
-        out=("displacement_tab_DIC.png", "displacement_tab_HDIC.png"),
-    ),
-    dict(
-        name="strain von Mises",
-        component="von_mises",
-        cmap="viridis",
-        pct=(1, 99),
-        vmax_scale=1.3,  # slightly lower contrast on the strain maps
-        dirs=("Strains", "Strains_HDIC"),
-        out=("strain_DIC.png", "strain_HDIC.png"),
-    ),
-]
+DIC_STEP = 5
+DIC_BORDER = 60      # half-window 30 + search 30
+XR_BORDER = 62       # half seed window 32 + search 30
+STRAIN_KERNEL = 3
+STRAIN_VMAX_PCT = 10.0
+DISP_PCT = (1, 99)
 
 
-# ----------------------------------------------------------------------------
-# Helpers
-# ----------------------------------------------------------------------------
-def load(folder, component):
-    """Return (array, path). array is None when the file does not exist."""
-    p = SRC / folder / f"{STEM}_{component}.tif"
-    if not p.exists():
-        return None, p
-    return tifffile.imread(p).astype(np.float32), p
+def load(folder, comp):
+    return tifffile.imread(SRC / folder / "Displacements" / f"{STEM}_{comp}.tif").astype(np.float64)
 
 
-def to_png(data, vmin, vmax, cmap_name, out_path):
-    """Apply the colormap and write an RGB PNG at native pixel resolution."""
-    norm = Normalize(vmin=vmin, vmax=vmax, clip=True)
-    cmap = colormaps[cmap_name].with_extremes(bad=(1, 1, 1, 1))  # NaN -> white
-    rgba = cmap(norm(data))                                      # H x W x 4, float 0..1
-    img = Image.fromarray((rgba * 255).astype(np.uint8), "RGBA").convert("RGB")
-    if SCALE != 1:
-        img = img.resize((img.width * SCALE, img.height * SCALE), Image.NEAREST)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    img.save(out_path)
+def deriv(f, axis, spacing):
+    k = np.arange(-STRAIN_KERNEL, STRAIN_KERNEL + 1, dtype=np.float64)
+    return correlate1d(f, k / (k ** 2).sum(), axis=axis, mode="nearest") / spacing
 
 
-# ----------------------------------------------------------------------------
-# Main
-# ----------------------------------------------------------------------------
+def effective_strain(u, v, spacing):
+    du_dy, du_dx = deriv(u, 0, spacing), deriv(u, 1, spacing)
+    dv_dy, dv_dx = deriv(v, 0, spacing), deriv(v, 1, spacing)
+    return np.sqrt((0.5 * (du_dx - dv_dy)) ** 2 + (0.5 * (du_dy + dv_dx)) ** 2)
+
+
+def dic_to_pixels(grid, shape):
+    """Bilinear resampling of a DIC grid onto the neural pixel grid."""
+    h, w = shape
+    off = (XR_BORDER - DIC_BORDER) / DIC_STEP
+    yy, xx = np.meshgrid(np.arange(h) / DIC_STEP + off, np.arange(w) / DIC_STEP + off, indexing="ij")
+    return map_coordinates(grid, [yy, xx], order=1, mode="nearest")
+
+
+def save(data, norm, cmap_name, name):
+    cmap = colormaps[cmap_name].with_extremes(bad=(1, 1, 1, 1))
+    rgb = (cmap(norm(data))[..., :3] * 255).astype(np.uint8)
+    out = DEST / name
+    Image.fromarray(rgb, "RGB").save(out, optimize=True)
+    print(f"   -> screens/{name}  ({data.shape[1]}x{data.shape[0]})")
+
+
 def main():
-    for f in FIELDS:
-        dic_dir, hdic_dir = f["dirs"]
-        dic, dic_p = load(dic_dir, f["component"])
-        hdic, hdic_p = load(hdic_dir, f["component"])
+    xr_u, xr_v = load("XR_DIC", "ux"), load("XR_DIC", "uy")
+    dic_u, dic_v = load("DIC", "ux"), load("DIC", "uy")
+    shape = xr_u.shape
 
-        present = [a for a in (dic, hdic) if a is not None]
-        if not present:
-            print(f"[skip] {f['name']}: no source TIFF found "
-                  f"({dic_p}, {hdic_p})")
-            continue
+    # Displacement uy, shared percentile scale
+    dic_uy = dic_to_pixels(dic_v, shape)
+    stack = np.concatenate([a[np.isfinite(a)] for a in (dic_uy, xr_v)])
+    lo, hi = np.percentile(stack, DISP_PCT)
+    print(f"[displacement uy] jet {lo:.4g} .. {hi:.4g}")
+    norm = Normalize(vmin=lo, vmax=hi, clip=True)
+    save(dic_uy, norm, "jet", "displacement_DIC.png")
+    save(xr_v, norm, "jet", "displacement_Argos2D.png")
 
-        # Shared color scale over whichever images of the pair exist.
-        stack = np.concatenate([a[np.isfinite(a)].ravel() for a in present])
-        lo, hi = np.percentile(stack, f["pct"])
-        hi = lo + (hi - lo) * f.get("vmax_scale", 1.0)
-        print(f"[{f['name']}] cmap={f['cmap']} "
-              f"vmin={lo:.4g} vmax={hi:.4g} (p{f['pct'][0]}-p{f['pct'][1]}"
-              f", vmax_scale={f.get('vmax_scale', 1.0)})")
-
-        for arr, src_p, out_name in (
-            (dic, dic_p, f["out"][0]),
-            (hdic, hdic_p, f["out"][1]),
-        ):
-            if arr is None:
-                print(f"   missing: {src_p.relative_to(SRC)}  ->  "
-                      f"{out_name} left unchanged")
-                continue
-            out = DEST / out_name
-            to_png(arr, lo, hi, f["cmap"], out)
-            print(f"   {src_p.relative_to(SRC)}  ->  "
-                  f"screens/{out_name}  ({arr.shape[1]}x{arr.shape[0]})")
+    # Effective strain, fixed 0-10 % scale
+    dic_eps = dic_to_pixels(effective_strain(dic_u, dic_v, DIC_STEP), shape) * 100.0
+    xr_eps = effective_strain(xr_u, xr_v, 1) * 100.0
+    print(f"[effective strain] viridis 0 .. {STRAIN_VMAX_PCT} %")
+    norm = Normalize(vmin=0.0, vmax=STRAIN_VMAX_PCT, clip=True)
+    save(dic_eps, norm, "viridis", "strain_DIC.png")
+    save(xr_eps, norm, "viridis", "strain_Argos2D.png")
 
 
 if __name__ == "__main__":

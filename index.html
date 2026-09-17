@@ -20,7 +20,7 @@
     <meta property="og:title" content="Argos &mdash; GPU-Accelerated DIC with Discontinuity Enrichment">
     <meta property="og:description" content="Heaviside-enriched shape functions inside the correlation: sharp cracks, twins and slip bands. Free edition available.">
     <meta property="og:url" content="https://argos-correlation.com/">
-    <meta property="og:image" content="https://argos-correlation.com/screens/strain_HDIC.png">
+    <meta property="og:image" content="https://argos-correlation.com/screens/strain_Argos2D.png">
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1442,7 +1442,7 @@
                     Argos2D embeds <strong>Heaviside-enriched shape functions</strong> directly into
                     the correlation, capturing cracks, twins and slip bands.
                 </p>
-                <div style="margin: 1.5rem auto 0 auto; max-width: 820px;">
+                <div style="margin: 1.5rem auto 0 auto; max-width: 680px;">
                     <!-- Field toggle: Displacement / Strain -->
                     <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
                         <div class="field-toggle" id="field-toggle">
@@ -1451,10 +1451,10 @@
                         </div>
                     </div>
 
-                    <!-- Before/After slider: DIC vs H-DIC -->
+                    <!-- Before/After slider: DIC vs Argos2D (neural correlation, xR-DIC) -->
                     <div class="comparison-slider" data-field-toggle style="position: relative; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.12); user-select: none; -webkit-user-select: none;">
-                        <!-- After image (H-DIC) — full width background -->
-                        <img class="cm-after" src="screens/strain_HDIC.png" alt="Heaviside-DIC field" style="display: block; width: 100%; height: auto;">
+                        <!-- After image (Argos2D, xR-DIC), full width background -->
+                        <img class="cm-after" src="screens/strain_Argos2D.png" alt="Argos2D field, neural correlation" style="display: block; width: 100%; height: auto;">
                         <!-- Before image (DIC) — clipped by slider -->
                         <div class="comparison-before" style="position: absolute; top: 0; left: 0; width: 50%; height: 100%; overflow: hidden;">
                             <img class="cm-before" src="screens/strain_DIC.png" alt="Standard DIC field" style="display: block; height: 100%;">
@@ -1470,19 +1470,21 @@
                         </div>
                         <!-- Labels -->
                         <div style="position: absolute; top: 0.5rem; left: 0.75rem; background: rgba(0,0,0,0.55); color: #fff; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 3px; z-index: 1;">Standard DIC</div>
-                        <div style="position: absolute; top: 0.5rem; right: 0.75rem; background: rgba(26,26,46,0.75); color: #fff; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 3px; z-index: 1;">Heaviside-DIC</div>
+                        <div style="position: absolute; top: 0.5rem; right: 0.75rem; background: rgba(26,26,46,0.75); color: #fff; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 3px; z-index: 1;">Argos2D</div>
                     </div>
                     <p class="fig-caption">
-                        <span id="field-caption">Strain field magnitude</span> computed on the multi-modal dataset of
+                        <span id="field-caption">Effective strain (0 to 10&nbsp;%)</span> computed on the multi-modal dataset of
                         J.C. Stinville, J.M. Hestroffer, M.A. Charpagne, A.T. Polonsky, M.P. Echlin, C.J. Torbet, V. Valle,
                         K.E. Nygren, M.P. Miller, O. Klaas, A. Loghin, I.J. Beyerlein, T.M. Pollock,
                         <a href="https://doi.org/10.1038/s41597-022-01525-w" target="_blank" rel="noopener"><em>Scientific Data</em> 9 (2022) 460</a>.
+                        Argos2D result: <a href="#neural-correlation">neural correlation</a>.
                     </p>
                 </div>
                 <div class="hero-tags">
                     <span class="hero-tag">CUDA native</span>
                     <span class="hero-tag">Multi-GPU compatible</span>
                     <span class="hero-tag">Interactive visualization</span>
+                    <a class="hero-tag" href="#neural-correlation" style="text-decoration: none;">Neural correlation</a>
                 </div>
 
                 <!-- =====================================================
@@ -1572,7 +1574,7 @@
                  une seule grandeur, l'effective strain de Stinville, calculee
                  identiquement pour les deux methodes
                  (OmniCorr2D/scripts/doc_figures/make_hdic_xrdic_slider.py). -->
-            <div class="feature-section">
+            <div class="feature-section" id="neural-correlation">
                 <h2>Neural Correlation (xR-DIC)</h2>
                 <p>
                     xR-DIC is derived from the RAFT optical flow architecture, heavily modified for
@@ -1587,7 +1589,7 @@
 
                 <div style="margin: 1.25rem auto 0 auto; max-width: 640px;">
                     <div class="comparison-slider" style="position: relative; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.12); user-select: none; -webkit-user-select: none;">
-                        <img class="cm-after" src="screens/eff_strain_xRDIC.png" alt="Effective strain computed with neural correlation (xR-DIC)" loading="lazy" style="display: block; width: 100%; height: auto;">
+                        <img class="cm-after" src="screens/strain_Argos2D.png" alt="Effective strain computed with neural correlation (xR-DIC)" loading="lazy" style="display: block; width: 100%; height: auto;">
                         <div class="comparison-before" style="position: absolute; top: 0; left: 0; width: 50%; height: 100%; overflow: hidden;">
                             <img class="cm-before" src="screens/eff_strain_HDIC.png" alt="Effective strain computed with H-DIC" loading="lazy" style="display: block; height: 100%;">
                         </div>
@@ -2102,14 +2104,14 @@
             // Field toggle: swap the DIC / H-DIC image pair and the caption
             const FIELDS = {
                 displacement: {
-                    before: 'screens/displacement_tab_DIC.png',
-                    after: 'screens/displacement_tab_HDIC.png',
-                    caption: 'U<sub>x</sub> displacement field'
+                    before: 'screens/displacement_DIC.png',
+                    after: 'screens/displacement_Argos2D.png',
+                    caption: 'U<sub>y</sub> displacement field'
                 },
                 strain: {
                     before: 'screens/strain_DIC.png',
-                    after: 'screens/strain_HDIC.png',
-                    caption: 'Strain field magnitude'
+                    after: 'screens/strain_Argos2D.png',
+                    caption: 'Effective strain (0 to 10&nbsp;%)'
                 }
             };
             const toggle = document.getElementById('field-toggle');
