@@ -48,16 +48,6 @@ STRAIN_KERNEL = 3
 STRAIN_VMAX_PCT = 10.0
 DISP_PCT = (1, 99)
 
-# LE TIERS SUPERIEUR EST COUPE. Le curseur du haut de page etait trop haut pour ce qu'il
-# montre, et c'est le BAS qui porte l'interet : la jonction de bandes et la fissure la plus
-# ouverte y sont. Coupe ici et pas en CSS, pour que le fichier servi ne pese pas pour des
-# pixels que personne ne voit. La section neuronale, elle, garde ses cartes entieres.
-CROP_TOP = 1 / 3
-
-# ET LE QUART DROIT. Meme raison : cette partie de la ROI est calme, les bandes et la
-# fissure sont a gauche. L'image finale est donc un paysage large, qui tient sur la page
-# sans l'etirer en hauteur.
-CROP_RIGHT = 1 / 4
 
 
 def load(folder, comp):
@@ -84,8 +74,6 @@ def dic_to_pixels(grid, shape):
 
 
 def save(data, norm, cmap_name, name):
-    data = data[int(round(data.shape[0] * CROP_TOP)):,
-                :int(round(data.shape[1] * (1 - CROP_RIGHT)))]
     cmap = colormaps[cmap_name].with_extremes(bad=(1, 1, 1, 1))
     rgb = (cmap(norm(data))[..., :3] * 255).astype(np.uint8)
     out = DEST / name
