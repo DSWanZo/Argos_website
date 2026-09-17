@@ -12,13 +12,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Argos &mdash; Digital Image Correlation for Cracks and Discontinuities</title>
-    <meta name="description" content="GPU-accelerated Digital Image Correlation: displacement, strain and crack opening fields, with Heaviside enrichment for discontinuities. Free edition for Windows.">
+    <meta name="description" content="GPU-accelerated Digital Image Correlation with three methods: standard DIC, Heaviside enrichment for cracks and discontinuities, and neural correlation. Free edition for Windows.">
     <link rel="icon" type="image/svg+xml" href="argos_logo.svg">
     <link rel="canonical" href="https://argos-correlation.com/">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Argos &mdash; GPU-Accelerated DIC with Discontinuity Enrichment">
-    <meta property="og:description" content="Heaviside-enriched shape functions inside the correlation: sharp cracks, twins and slip bands. Free edition available.">
+    <meta property="og:title" content="Argos2D: three ways to correlate, one GPU-native tool">
+    <meta property="og:description" content="Standard DIC, Heaviside enrichment for cracks, twins and slip bands, and neural correlation, computed on your GPU. Free edition available.">
     <meta property="og:url" content="https://argos-correlation.com/">
     <meta property="og:image" content="https://argos-correlation.com/screens/strain_Argos2D.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -997,6 +997,69 @@
             margin-top: 0.5rem;
         }
 
+        /* Les trois methodes, sous le curseur du haut : le sommaire de la page.
+           Un lien par carte, vers la section qui la detaille. */
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.9rem;
+            margin: 2rem 0 0 0;
+            text-align: left;
+        }
+
+        .method-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            padding: 1.1rem 1.2rem;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--surface);
+            color: inherit;
+            text-decoration: none;
+            transition: border-color 0.15s ease;
+        }
+
+        .method-card:hover { border-color: var(--accent); }
+        .method-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .method-step {
+            font-family: var(--mono);
+            font-size: var(--t-xs);
+            color: var(--muted);
+        }
+
+        .method-name {
+            font-size: var(--t-lg);
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.3;
+        }
+
+        .method-desc {
+            font-size: var(--t-md);
+            color: var(--body);
+            flex: 1;
+        }
+
+        .method-badge {
+            align-self: flex-start;
+            font-family: var(--mono);
+            font-size: var(--t-xs);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 0.1rem 0.45rem;
+        }
+
+        .method-badge.is-free {
+            color: var(--accent-hi);
+            border-color: var(--accent);
+            background: var(--accent-tint);
+        }
+
         .edition-card {
             display: flex;
             flex-direction: column;
@@ -1390,6 +1453,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .methods-grid {
+                grid-template-columns: 1fr;
+            }
+
             .hero h2 {
                 font-size: 1.3rem;
             }
@@ -1437,10 +1504,11 @@
 
             <!-- ==================== HERO ==================== -->
             <div class="hero">
-                <h2>GPU-Accelerated DIC with Discontinuity Enrichment</h2>
+                <h2>Three ways to correlate. One GPU-native tool.</h2>
                 <p>
-                    Argos2D embeds <strong>Heaviside-enriched shape functions</strong> directly into
-                    the correlation, capturing cracks, twins and slip bands.
+                    From classic subset DIC to crack-aware <strong>Heaviside enrichment</strong> and
+                    <strong>neural correlation</strong>, Argos2D lets you pick the right method for each
+                    test, and compare them on the same images.
                 </p>
                 <div style="margin: 1.5rem auto 0 auto; max-width: 680px;">
                     <!-- Field toggle: Displacement / Strain -->
@@ -1503,6 +1571,27 @@
                         Windows 10/11 &middot; 64-bit
                     </p>
                 </div>
+
+                <div class="methods-grid">
+                    <a class="method-card" href="#under-the-hood">
+                        <span class="method-step">Method 1</span>
+                        <span class="method-name">Standard DIC</span>
+                        <span class="method-desc">The proven subset method, CUDA-accelerated. Fast, robust, fully tunable.</span>
+                        <span class="method-badge is-free">Free</span>
+                    </a>
+                    <a class="method-card" href="#heaviside">
+                        <span class="method-step">Method 2</span>
+                        <span class="method-name">Heaviside-enriched DIC</span>
+                        <span class="method-desc">Captures cracks, twins and slip bands <em>inside</em> the subset, where standard DIC smears them.</span>
+                        <span class="method-badge">Full edition</span>
+                    </a>
+                    <a class="method-card" href="#neural-correlation">
+                        <span class="method-step">Method 3</span>
+                        <span class="method-name">Neural correlation</span>
+                        <span class="method-desc">A dense, pixel-wise field from a RAFT-derived network, computed locally on your GPU.</span>
+                        <span class="method-badge">Full edition &middot; option</span>
+                    </a>
+                </div>
             </div>
 
             <!-- ==================== 1. HEAVISIDE ENRICHMENT ====================
@@ -1510,8 +1599,8 @@
                  sections qui expliquent le fonctionnement -- le modele ici,
                  son implementation la-bas. Les quatre autres montrent des
                  resultats et restent claires. -->
-            <div class="feature-section tone-dark">
-                <h2>Heaviside-Enriched Displacement Fields</h2>
+            <div class="feature-section tone-dark" id="heaviside">
+                <h2>Method 2 &middot; Heaviside-Enriched DIC</h2>
                 <p>
                     Standard DIC assumes continuous displacement inside each subset, which smears out
                     discontinuities across several pixels. Argos adds a Heaviside step function to the
@@ -1575,7 +1664,7 @@
                  identiquement pour les deux methodes
                  (OmniCorr2D/scripts/doc_figures/make_hdic_xrdic_slider.py). -->
             <div class="feature-section" id="neural-correlation">
-                <h2>Neural Correlation (xR-DIC)</h2>
+                <h2>Method 3 &middot; Neural Correlation (xR-DIC)</h2>
                 <p>
                     xR-DIC is derived from the RAFT optical flow architecture, heavily modified for
                     digital image correlation and trained on synthetic speckle images. It runs locally
@@ -1695,7 +1784,7 @@
                  Seule bande sombre de la page, et pleine largeur : elle casse
                  la suite des cartes blanches au moment ou le lecteur a fini
                  l'argumentaire, juste avant qu'on lui demande quelque chose. -->
-            <div class="feature-section tone-dark">
+            <div class="feature-section tone-dark" id="under-the-hood">
                 <h2>Under the Hood</h2>
                 <p class="section-subtitle">Core engine specifications</p>
                 <div class="tech-grid">
