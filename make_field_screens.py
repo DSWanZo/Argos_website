@@ -48,6 +48,12 @@ STRAIN_KERNEL = 3
 STRAIN_VMAX_PCT = 10.0
 DISP_PCT = (1, 99)
 
+# LE TIERS SUPERIEUR EST COUPE. Le curseur du haut de page etait trop haut pour ce qu'il
+# montre, et c'est le BAS qui porte l'interet : la jonction de bandes et la fissure la plus
+# ouverte y sont. Coupe ici et pas en CSS, pour que le fichier servi ne pese pas pour des
+# pixels que personne ne voit. La section neuronale, elle, garde ses cartes entieres.
+CROP_TOP = 1 / 3
+
 
 def load(folder, comp):
     return tifffile.imread(SRC / folder / "Displacements" / f"{STEM}_{comp}.tif").astype(np.float64)
@@ -73,6 +79,7 @@ def dic_to_pixels(grid, shape):
 
 
 def save(data, norm, cmap_name, name):
+    data = data[int(round(data.shape[0] * CROP_TOP)):]
     cmap = colormaps[cmap_name].with_extremes(bad=(1, 1, 1, 1))
     rgb = (cmap(norm(data))[..., :3] * 255).astype(np.uint8)
     out = DEST / name

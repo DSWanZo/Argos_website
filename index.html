@@ -280,19 +280,19 @@
         .feature-section {
             background: #fff;
             border-radius: 8px;
-            padding: 2rem 2rem 1.5rem 2rem;
-            margin-bottom: 2rem;
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            margin-bottom: 2.5rem;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
         .feature-section h2 {
-            font-size: var(--t-xl);
+            font-size: var(--t-2xl);
             font-weight: 600;
             letter-spacing: -0.015em;
             line-height: 1.25;
             text-wrap: balance;
             color: var(--ink);
-            margin-bottom: 0.35rem;
+            margin-bottom: 0.9rem;
             padding-bottom: 0;
             border-bottom: none;
         }
@@ -307,7 +307,9 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--muted);
-            margin-bottom: 1.25rem;
+            /* AU-DESSUS du titre depuis la refonte : lu en premier, il annonce le
+               domaine avant de nommer la chose, et le titre garde le poids. */
+            margin-bottom: 0.5rem;
 
             /* Le sous-titre est un <p>, donc il heritait du max-width: 68ch pose
                sur .feature-section p. Cette limite sert la lisibilite d'un
@@ -810,6 +812,26 @@
            serrent dans une boite plus etroite que son image et la calent a
            gauche, faute de marges auto. Les selecteurs sont scopes pour battre
            les deux regles de paragraphe, dont la specificite est la meme. */
+        /* ========== SECTIONS SANS IMAGE ==========
+           Une equation ou une grille de cartes est LARGE ET COURTE : en colonne
+           de droite elle laisse un vide et serre le texte a gauche (mesure sur
+           la methode 2). Ces sections gardent donc la pleine largeur : le texte
+           et sa note se partagent la premiere ligne, l'illustration s'etale
+           dessous, ou elle respire. */
+        .wide-top {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .wide-main { margin-top: 2rem; }
+
+        .feature-wide .tech-grid {
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 0;
+        }
+
         /* ========== RANGEES ALTERNEES ==========
            Pour les sections qui montrent un RESULTAT avec peu de texte (rupture,
            deformations, mosaique) : texte d'un cote, capture de l'autre, en
@@ -821,7 +843,7 @@
         .feature-section.feature-split {
             display: grid;
             grid-template-columns: 2fr 3fr;
-            gap: 2rem;
+            gap: 3rem;
             align-items: center;
         }
 
@@ -1533,6 +1555,9 @@
             .feature-split.is-reversed .split-text,
             .feature-split.is-reversed .split-media { order: 0; }
 
+            .wide-top { grid-template-columns: 1fr; gap: 1.25rem; }
+            .feature-wide .tech-grid { grid-template-columns: 1fr; }
+
             .editions-section {
                 padding: 1.5rem;
             }
@@ -1655,36 +1680,41 @@
                  sections qui expliquent le fonctionnement -- le modele ici,
                  son implementation la-bas. Les quatre autres montrent des
                  resultats et restent claires. -->
-            <div class="feature-section feature-split tone-dark" id="heaviside">
-                <div class="split-text">
-                <h2>Method 2 &middot; Heaviside-Enriched DIC</h2>
+            <div class="feature-section feature-wide tone-dark" id="heaviside">
+                <div class="wide-top">
+                    <div>
+                <p class="section-subtitle">Method 2</p>
+                <h2>Heaviside-Enriched DIC</h2>
                 <p>
                     Standard DIC assumes continuous displacement inside each subset, which smears out
                     discontinuities across several pixels. Argos adds a Heaviside step function to the
                     correlation model, allowing a sharp jump to be identified <em>within</em> each subset.
                 </p>
                 <p>The subset shape function is augmented with a jump vector and a Heaviside function.</p>
-                <p class="method-in-science">
-                    <span class="mis-lead">Used in <em>Science</em></span>
-                    Developed by V.&nbsp;Valle and co-workers at Institut&nbsp;PPRIME,
-                    Universit&eacute; de Poitiers.
-                    <span class="mis-ref">
-                        <span class="mis-tag">Method</span>
-                        <span>F.&nbsp;Bourdin <em>et&nbsp;al.</em>, <em>Measurements of plastic
-                        localization by heaviside-digital image correlation</em>, Acta&nbsp;Materialia
-                        <b>157</b> (2018) 307&ndash;325.
-                        <a href="https://doi.org/10.1016/j.actamat.2018.07.013" target="_blank" rel="noopener">DOI</a></span>
-                    </span>
-                    <span class="mis-ref">
-                        <span class="mis-tag">Used in</span>
-                        <span>J.C.&nbsp;Stinville <em>et&nbsp;al.</em>, <em>On the origins of
-                        fatigue strength in crystalline metallic materials</em>, <b>Science</b>
-                        <b>377</b> (2022) 1065&ndash;1071.
-                        <a href="https://doi.org/10.1126/science.abn0392" target="_blank" rel="noopener">DOI</a></span>
-                    </span>
-                </p>
+                    </div>
+                    <div>
+    <p class="method-in-science">
+                        <span class="mis-lead">Used in <em>Science</em></span>
+                        Developed by V.&nbsp;Valle and co-workers at Institut&nbsp;PPRIME,
+                        Universit&eacute; de Poitiers.
+                        <span class="mis-ref">
+                            <span class="mis-tag">Method</span>
+                            <span>F.&nbsp;Bourdin <em>et&nbsp;al.</em>, <em>Measurements of plastic
+                            localization by heaviside-digital image correlation</em>, Acta&nbsp;Materialia
+                            <b>157</b> (2018) 307&ndash;325.
+                            <a href="https://doi.org/10.1016/j.actamat.2018.07.013" target="_blank" rel="noopener">DOI</a></span>
+                        </span>
+                        <span class="mis-ref">
+                            <span class="mis-tag">Used in</span>
+                            <span>J.C.&nbsp;Stinville <em>et&nbsp;al.</em>, <em>On the origins of
+                            fatigue strength in crystalline metallic materials</em>, <b>Science</b>
+                            <b>377</b> (2022) 1065&ndash;1071.
+                            <a href="https://doi.org/10.1126/science.abn0392" target="_blank" rel="noopener">DOI</a></span>
+                        </span>
+                    </p>
+                    </div>
                 </div>
-                <div class="split-media">
+                <div class="wide-main">
                 <div class="equation-block">
                     <div class="eq-row">
                         <span><b>&phi;</b>(<b>x</b>) =</span>
@@ -1725,7 +1755,8 @@
                  (OmniCorr2D/scripts/doc_figures/make_hdic_xrdic_slider.py). -->
             <div class="feature-section feature-split is-reversed" id="neural-correlation">
                 <div class="split-text">
-                <h2>Method 3 &middot; Neural Correlation (xR-DIC)</h2>
+                <p class="section-subtitle">Method 3</p>
+                <h2>Neural Correlation (xR-DIC)</h2>
                 <p>
                     xR-DIC is derived from the RAFT optical flow architecture, heavily modified for
                     digital image correlation and trained on synthetic speckle images. It runs locally
@@ -1740,7 +1771,7 @@
                 <div class="split-media">
                 <div>
                     <div class="comparison-slider" style="position: relative; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.12); user-select: none; -webkit-user-select: none;">
-                        <img class="cm-after" src="screens/strain_Argos2D.png" alt="Effective strain computed with neural correlation (xR-DIC)" loading="lazy" style="display: block; width: 100%; height: auto;">
+                        <img class="cm-after" src="screens/eff_strain_xRDIC.png" alt="Effective strain computed with neural correlation (xR-DIC)" loading="lazy" style="display: block; width: 100%; height: auto;">
                         <div class="comparison-before" style="position: absolute; top: 0; left: 0; width: 50%; height: 100%; overflow: hidden;">
                             <img class="cm-before" src="screens/eff_strain_HDIC.png" alt="Effective strain computed with H-DIC" loading="lazy" style="display: block; height: 100%;">
                         </div>
@@ -1767,8 +1798,8 @@
             <!-- ==================== INTERACTIVE VISUALIZATION ==================== -->
             <div class="feature-section feature-split" id="interactive">
                 <div class="split-text">
-                <h2>Interactive Visualization</h2>
                 <p class="section-subtitle">A full GUI to set up correlations and explore the results.</p>
+                <h2>Interactive Visualization</h2>
                 <p>
                     Load your images, draw the region of interest, run the correlation, then browse
                     displacement, strain and fracture maps in the same window, with synchronized views,
@@ -1790,8 +1821,8 @@
             <!-- ==================== 2. FRACTURE ANALYSIS ==================== -->
             <div class="feature-section feature-split is-reversed">
                 <div class="split-text">
-                    <h2>Fracture &amp; Discontinuity Analysis</h2>
                     <p class="section-subtitle">Dedicated post-processing for cracks, twins and slip bands.</p>
+                    <h2>Fracture &amp; Discontinuity Analysis</h2>
                     <p>
                         The fracture tab exposes the full enrichment output: crack opening displacement (intensity and direction),
                         crack angle &alpha;, opening direction &beta;, and a crystallographic decomposition into
@@ -1814,8 +1845,8 @@
             <!-- ==================== 3. STRAIN POST-PROCESSING ==================== -->
             <div class="feature-section feature-split">
                 <div class="split-text">
-                    <h2>Strain Post-Processing</h2>
                     <p class="section-subtitle">Customizable derivative kernels and built-in criteria.</p>
+                    <h2>Strain Post-Processing</h2>
                     <p>
                         Compute the full strain tensor (&epsilon;<sub>xx</sub>, &epsilon;<sub>yy</sub>, &epsilon;<sub>xy</sub>)
                         from displacement fields using separable gradient operators.
@@ -1841,8 +1872,8 @@
             <!-- ==================== 5. MOSAIC & BATCH ==================== -->
             <div class="feature-section feature-split is-reversed">
                 <div class="split-text">
-                    <h2>Mosaic Stitching &amp; Batch Mode</h2>
                     <p class="section-subtitle">Large-area analysis from tiled acquisitions.</p>
+                    <h2>Mosaic Stitching &amp; Batch Mode</h2>
                     <p>
                         Assemble multi-tile acquisitions into a seamless mosaic before running DIC.
                     </p>
@@ -1868,16 +1899,14 @@
                  Seule bande sombre de la page, et pleine largeur : elle casse
                  la suite des cartes blanches au moment ou le lecteur a fini
                  l'argumentaire, juste avant qu'on lui demande quelque chose. -->
-            <div class="feature-section feature-split tone-dark" id="under-the-hood">
-                <div class="split-text">
-                <h2>Under the Hood</h2>
+            <div class="feature-section feature-wide tone-dark" id="under-the-hood">
                 <p class="section-subtitle">Core engine specifications</p>
+                <h2>Under the Hood</h2>
                 <p>
                     Everything runs on your NVIDIA GPU, from pixel search to sub-pixel optimization and
                     neural inference. Your images never leave your computer.
                 </p>
-                </div>
-                <div class="split-media">
+                <div class="wide-main">
                 <div class="tech-grid">
                     <div class="tech-item">
                         <strong>GPU Correlation</strong>
